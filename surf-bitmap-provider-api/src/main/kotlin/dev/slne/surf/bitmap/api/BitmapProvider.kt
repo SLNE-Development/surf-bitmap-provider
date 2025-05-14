@@ -130,7 +130,9 @@ open class BitmapProvider(
         "'" to singleQuote,
         "]" to squareBracketClose,
         "[" to squareBracketOpen,
-        "~" to tilde
+        "~" to tilde,
+        "\t" to spacerOne,
+        "\n" to spacerTwo,
     )
 
     /**
