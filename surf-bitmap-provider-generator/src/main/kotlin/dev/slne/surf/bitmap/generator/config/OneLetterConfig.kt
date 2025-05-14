@@ -7,5 +7,5 @@ data class OneLetterConfig(
     val texture: String,
     val ascent: Int = 7,
     val height: Int = 7,
-    val char: String? = null
+    val char: Char? = null
 )
