@@ -2,7 +2,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 
 import dev.slne.surf.bitmap.api.BitmapProvider
 
-object LettersRed : BitmapProvider(
+object ClanNeonpulse : BitmapProvider(
     a = "ꐑ",
     b = "ꐒ",
     c = "ꐓ",
