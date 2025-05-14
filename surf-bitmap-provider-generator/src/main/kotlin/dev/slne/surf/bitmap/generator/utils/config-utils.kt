@@ -16,18 +16,16 @@ import kotlin.io.path.writeText
 suspend fun readConfig(
     configPath: Path
 ): LetterConfig? = withContext(Dispatchers.IO) {
-    val loader = YamlConfigurationLoader.builder()
+    val bitmapName = configPath.fileName.toString().removeSuffix(".yml")
+    val rervertedConfig = revertConfigKeys(configPath, bitmapName)
+    val node = YamlConfigurationLoader.builder()
         .path(configPath)
         .defaultOptions { options ->
             options.serializers { builder ->
                 builder.registerAnnotatedObjects(objectMapperFactory())
             }
         }
-        .build()
-
-    val node = runCatching {
-        loader.load()
-    }.getOrNull() ?: return@withContext null
+        .buildAndLoadString(rervertedConfig)
 
     return@withContext node.get<LetterConfig>()
 }
@@ -144,3 +142,36 @@ suspend fun generateBitmapFromConfig(
 
     configOutputPath.writeText(filledTemplate)
 }
+
+suspend fun revertConfigKeys(configPath: Path, bitmapName: String): String =
+    withContext(Dispatchers.IO) {
+        if (!Files.exists(configPath)) {
+            return@withContext ""
+        }
+
+        val fileContent = Files.readString(configPath)
+        val keyRegex = Regex("""(?m)^${bitmapName}_([a-z0-9_]+):""")
+
+        return@withContext fileContent.replace(keyRegex) { match ->
+            val originalKey = match.groupValues[1]
+            "$originalKey:"
+        }
+    }
+
+suspend fun replaceConfigKeys(config: LetterConfig, configPath: Path): GeneratorResult =
+    withContext(Dispatchers.IO) {
+        val bitmapName = config.bitmapName
+        val configFilePath = configPath / "$bitmapName.yml"
+
+        val fileContent = Files.readString(configFilePath)
+        val keyRegex = Regex("""(?m)^([a-z0-9_]+):""")
+
+        val updatedContent = fileContent.replace(keyRegex) { match ->
+            val key = match.groupValues[1]
+            "${bitmapName}_$key:"
+        }
+
+        configFilePath.writeText(updatedContent)
+
+        return@withContext GeneratorResult.FILE_GENERATED
+    }

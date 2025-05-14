@@ -5,6 +5,9 @@ import org.spongepowered.configurate.objectmapping.meta.Setting
 
 @ConfigSerializable
 data class LetterConfig(
+    @Setting("bitmap_name")
+    val bitmapName: String,
+
     val bitmap: BitmapConfig,
 
     @Setting("acute_accent")
@@ -19,7 +22,7 @@ data class LetterConfig(
     @Setting("bracket_open")
     val bracketOpen: OneLetterConfig,
 
-    @Setting("circum_flex")
+    @Setting("circumflex")
     val circumflex: OneLetterConfig,
 
     @Setting("colon")

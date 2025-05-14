@@ -5,6 +5,7 @@ import dev.slne.surf.bitmap.generator.config.LetterConfig
 import dev.slne.surf.bitmap.generator.config.OneLetterConfig
 import dev.slne.surf.bitmap.generator.plugin
 import dev.slne.surf.bitmap.generator.utils.recolorFolder
+import dev.slne.surf.bitmap.generator.utils.replaceConfigKeys
 import dev.slne.surf.bitmap.generator.utils.writeConfig
 import java.nio.file.Path
 import kotlin.io.path.div
@@ -52,6 +53,7 @@ class BitmapProviderGenerator(
             .replace("\\", "/")
 
         val config = LetterConfig(
+            bitmapName = name,
             acuteAccent = OneLetterConfig("${texturePathString}/acute_accent.png"),
             ampersand = OneLetterConfig("${texturePathString}/ampersand.png"),
             bracketClose = OneLetterConfig("${texturePathString}/bracket_close.png"),
@@ -88,11 +90,17 @@ class BitmapProviderGenerator(
             ),
         )
 
-        return writeConfig(
+        val writeResult = writeConfig(
             name = name,
             configPath = configPath,
             config = config,
         )
+
+        if (writeResult != GeneratorResult.FILE_GENERATED) {
+            return writeResult
+        }
+
+        return replaceConfigKeys(config, configPath)
     }
 
 }
