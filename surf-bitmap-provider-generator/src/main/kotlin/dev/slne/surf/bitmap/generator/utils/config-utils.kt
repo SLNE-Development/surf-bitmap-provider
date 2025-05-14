@@ -134,7 +134,7 @@ suspend fun generateBitmapFromConfig(
 
     var filledTemplate = templateContent
     for ((key, value) in replacements) {
-        filledTemplate = filledTemplate.replace("""$key = """"", """$key = "$value"""")
+        filledTemplate = filledTemplate.replace("{{$key}}", value.toString())
     }
 
     filledTemplate = filledTemplate.replace("TemplateBitmap", configName)
