@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object ClanPeachwave : BitmapProvider(
+    name = "peachwave",
     a = "Ɬ",
     b = "Ɪ",
     c = "ꞯ",

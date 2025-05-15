@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object ClanIceforge : BitmapProvider(
+    name = "iceforge",
     a = "ꓸ",
     b = "ꓹ",
     c = "ꓺ",

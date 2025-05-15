@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object ClanBubblebyte : BitmapProvider(
+    name = "bubblebyte",
     a = "ꡇ",
     b = "ꡈ",
     c = "ꡉ",

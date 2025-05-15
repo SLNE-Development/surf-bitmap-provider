@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object ClanDreamjam : BitmapProvider(
+    name = "dreamjam",
     a = "꣡",
     b = "꣢",
     c = "꣣",

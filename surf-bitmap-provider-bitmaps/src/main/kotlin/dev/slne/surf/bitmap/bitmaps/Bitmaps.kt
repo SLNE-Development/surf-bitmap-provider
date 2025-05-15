@@ -35,5 +35,43 @@ enum class Bitmaps(
     CLAN_VOIDPOP(ClanVoidpop),
     CLAN_BUBBLEBYTE(ClanBubblebyte),
     CLAN_SYNTHVORTEX(ClanSynthvortex),
+
+    // Clan Yellow
+    CLAN_LASERBANANA(ClanLaserbanana),
+    CLAN_SOLARFUNK(ClanSolarfunk),
+    CLAN_LIMONADEKID(ClanLimonadekid),
+    CLAN_BEAMBLAST(ClanBeamblast),
+    CLAN_MELLOWACID(ClanMellowacid),
+    CLAN_YELLOWPOP(ClanYellowpop),
+    CLAN_BLITZBLISS(ClanBlitzbliss),
+    CLAN_EGGCORE(ClanEggcore),
+
+    // Clan Blau
+    CLAN_OCEANWAVE(ClanOceanwave),
+    CLAN_FROSTBYTE(ClanFrostbyte),
+    CLAN_DEEPDIVE(ClanDeepdive),
+    CLAN_NEONRIPPLE(ClanNeonripple),
+    CLAN_COBALTFLASH(ClanCobaltflash),
+    CLAN_BLUEGLOW(ClanBlueglow),
+    CLAN_SKYSHARD(ClanSkyshard),
+    CLAN_AQUAFLOW(ClanAquaflow),
+    CLAN_STARLIGHT(ClanStarlight),
+    CLAN_TWILIGHTBURST(ClanTwilightburst),
+
+    // Clan Fresh
+    CLAN_PLASMAFLARE(ClanPlasmaflare),
+    CLAN_MINTQUAKE(ClanMintquake),
+    CLAN_GLITCHWAVE(ClanGlitchwave),
+    CLAN_EMBERSTORM(ClanEmberstorm),
+    CLAN_CYBERPEACH(ClanCyberpeach),
+    CLAN_VIOLETNOVA(ClanVioletnova),
+    CLAN_MAGMAREEF(ClanMagmareef),
+    CLAN_ICEDRIFT(ClanIcedrift),
+    CLAN_NEONFIZZ(ClanNeonfizz),
+    CLAN_AURORASHADE(ClanAurorashade),
+
+    // Clan Funky Blue
+    CLAN_ARCTICRUSH(ClanArcticrush),
+    CLAN_POLARSHINE(ClanPolarshine),
     ;
 }

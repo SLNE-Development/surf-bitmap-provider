@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object ClanTwilightcore : BitmapProvider(
+    name = "twilightcore",
     a = "ꕅ",
     b = "ꕆ",
     c = "ꕇ",
