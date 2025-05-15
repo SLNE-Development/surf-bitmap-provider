@@ -11,8 +11,7 @@ import org.spongepowered.configurate.kotlin.objectMapperFactory
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader
 import java.nio.file.Files
 import java.nio.file.Path
-import kotlin.io.path.div
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 suspend fun readConfig(
     configPath: Path
@@ -62,7 +61,7 @@ suspend fun generateBitmapFromConfig(
 ) = withContext(Dispatchers.IO) {
     val templateContent = Files.readString(templatePath)
 
-    val replacements = object2ObjectMapOf<String, Char?>(
+    val replacements = object2ObjectMapOf(
         "a" to config.bitmap.charMap['a'],
         "b" to config.bitmap.charMap['b'],
         "c" to config.bitmap.charMap['c'],
@@ -140,18 +139,17 @@ suspend fun generateBitmapFromConfig(
     filledTemplate = filledTemplate.replace("TemplateBitmap", configName)
 
     val configOutputPath = outputPath / "$configName.kt"
-    Files.createDirectories(configOutputPath.parent)
-
+    configOutputPath.createParentDirectories()
     configOutputPath.writeText(filledTemplate)
 }
 
 suspend fun revertConfigKeys(configPath: Path, bitmapName: String): String =
     withContext(Dispatchers.IO) {
-        if (!Files.exists(configPath)) {
+        if (configPath.notExists()) {
             return@withContext ""
         }
 
-        val fileContent = Files.readString(configPath)
+        val fileContent = configPath.readText()
         val keyRegex = Regex("""(?m)^${bitmapName}_([a-z0-9_]+):""")
 
         fileContent.replace(keyRegex) { match ->
@@ -166,7 +164,7 @@ suspend fun replaceConfigKeys(config: LetterConfig, configPath: Path): Generator
         val bitmapName = config.bitmapName
         val configFilePath = configPath / "$bitmapName.yml"
 
-        val fileContent = Files.readString(configFilePath)
+        val fileContent = configFilePath.readText()
         val updatedContent = fileContent.replace(replaceConfigKeysPattern) { match ->
             val key = match.groupValues[1]
             "${bitmapName}_$key:"
