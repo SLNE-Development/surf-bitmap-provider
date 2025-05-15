@@ -36,7 +36,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
             bitmaps.addAll(Bitmaps.entries)
         }
 
-        if (bitmap.isEmpty()) {
+        if (bitmap.isEmpty() || (bitmapsEntry == null && bitmap != "ALL")) {
             sender.sendText {
                 appendPrefix()
 
