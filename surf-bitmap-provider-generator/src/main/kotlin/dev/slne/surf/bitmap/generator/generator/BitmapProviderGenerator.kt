@@ -70,7 +70,7 @@ class BitmapProviderGenerator(
             euro = OneLetterConfig("${texturePathString}/euro.png"),
             exclamationMark = OneLetterConfig("${texturePathString}/exclamation_mark.png"),
             graveAccent = OneLetterConfig("${texturePathString}/grave_accent.png"),
-            greaterThan = OneLetterConfig("${texturePathString}/greaterThan.png"),
+            greaterThan = OneLetterConfig("${texturePathString}/greater_than.png"),
             hyphen = OneLetterConfig("${texturePathString}/hyphen.png"),
             lessThan = OneLetterConfig("${texturePathString}/less_than.png"),
             pipe = OneLetterConfig("${texturePathString}/pipe.png"),
