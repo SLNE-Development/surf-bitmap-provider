@@ -101,6 +101,12 @@ suspend fun generateBitmapFromConfig(
         "nine" to charMap['9'],
         "slash" to charMap['/'],
         "backslash" to charMap['\\'],
+        "underscore" to charMap['_'],
+        "plus" to charMap['+'],
+        "percent" to charMap['%'],
+        "equal" to charMap['='],
+        "hash" to charMap['#'],
+        "star" to charMap['*'],
 
         "acuteAccent" to config.acuteAccent.char,
         "ampersand" to config.ampersand.char,
