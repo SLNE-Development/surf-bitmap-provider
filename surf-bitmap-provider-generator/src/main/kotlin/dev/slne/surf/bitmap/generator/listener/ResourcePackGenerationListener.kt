@@ -5,6 +5,7 @@ import com.nexomc.nexo.api.events.resourcepack.NexoPostPackGenerateEvent
 import dev.slne.surf.bitmap.generator.plugin
 import dev.slne.surf.bitmap.generator.utils.generateBitmapFromConfig
 import dev.slne.surf.bitmap.generator.utils.readConfig
+import dev.slne.surf.surfapi.bukkit.api.extensions.server
 import dev.slne.surf.surfapi.core.api.util.mutableObjectSetOf
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,7 +17,7 @@ object ResourcePackGenerationListener : Listener {
 
     @EventHandler
     fun onNexoPostPackGenerate(event: NexoPostPackGenerateEvent) {
-        val nexoPluginFolderPath = plugin.dataPath.parent / "Nexo"
+        val nexoPluginFolderPath = server.pluginsFolder.toPath() / "Nexo"
         val nexoGlyphsPath = nexoPluginFolderPath / "glyphs" / "bitmaps"
 
         if (!Files.exists(nexoGlyphsPath)) {
@@ -49,7 +50,7 @@ object ResourcePackGenerationListener : Listener {
                     .replace("plugins/Nexo/glyphs/bitmaps", "")
                     .replace("\\", "/")
                     .replace(".yml", "")
-                
+
                 val fileNamePascalCase = fileName
                     .split("/")
                     .map { it.replaceFirstChar { char -> char.uppercase() } }

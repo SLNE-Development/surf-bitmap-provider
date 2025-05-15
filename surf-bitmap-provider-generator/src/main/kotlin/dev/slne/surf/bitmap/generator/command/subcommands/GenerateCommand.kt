@@ -7,6 +7,7 @@ import dev.slne.surf.bitmap.generator.generator.BitmapProviderGenerator
 import dev.slne.surf.bitmap.generator.generator.GeneratorResult
 import dev.slne.surf.bitmap.generator.plugin
 import dev.slne.surf.bitmap.generator.utils.PermissionRegistry
+import dev.slne.surf.surfapi.bukkit.api.extensions.server
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import org.bukkit.command.CommandSender
 import kotlin.io.path.div
@@ -83,7 +84,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
             return@anyExecutor
         }
 
-        val nexoPluginFolderPath = plugin.dataPath.parent / "Nexo"
+        val nexoPluginFolderPath = server.pluginsFolder.toPath() / "Nexo"
         val nexoGlyphsPath = nexoPluginFolderPath / "glyphs" / "bitmaps"
         val nexoTexturesPath =
             nexoPluginFolderPath / "pack" / "assets" / "minecraft" / "textures" / "bitmaps"

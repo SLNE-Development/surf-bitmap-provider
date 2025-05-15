@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.generator.utils
 import dev.slne.surf.bitmap.generator.config.LetterConfig
 import dev.slne.surf.bitmap.generator.generator.GeneratorResult
 import dev.slne.surf.bitmap.generator.plugin
+import dev.slne.surf.surfapi.core.api.util.object2ObjectMapOf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.spongepowered.configurate.kotlin.extensions.get
@@ -61,43 +62,43 @@ suspend fun generateBitmapFromConfig(
 ) = withContext(Dispatchers.IO) {
     val templateContent = Files.readString(templatePath)
 
-    val replacements = mapOf(
-        "a" to config.bitmap.charMap["a"],
-        "b" to config.bitmap.charMap["b"],
-        "c" to config.bitmap.charMap["c"],
-        "d" to config.bitmap.charMap["d"],
-        "e" to config.bitmap.charMap["e"],
-        "f" to config.bitmap.charMap["f"],
-        "g" to config.bitmap.charMap["g"],
-        "h" to config.bitmap.charMap["h"],
-        "i" to config.bitmap.charMap["i"],
-        "j" to config.bitmap.charMap["j"],
-        "k" to config.bitmap.charMap["k"],
-        "l" to config.bitmap.charMap["l"],
-        "m" to config.bitmap.charMap["m"],
-        "n" to config.bitmap.charMap["n"],
-        "o" to config.bitmap.charMap["o"],
-        "p" to config.bitmap.charMap["p"],
-        "q" to config.bitmap.charMap["q"],
-        "r" to config.bitmap.charMap["r"],
-        "s" to config.bitmap.charMap["s"],
-        "t" to config.bitmap.charMap["t"],
-        "u" to config.bitmap.charMap["u"],
-        "v" to config.bitmap.charMap["v"],
-        "w" to config.bitmap.charMap["w"],
-        "x" to config.bitmap.charMap["x"],
-        "y" to config.bitmap.charMap["y"],
-        "z" to config.bitmap.charMap["z"],
-        "zero" to config.bitmap.charMap["0"],
-        "one" to config.bitmap.charMap["1"],
-        "two" to config.bitmap.charMap["2"],
-        "three" to config.bitmap.charMap["3"],
-        "four" to config.bitmap.charMap["4"],
-        "five" to config.bitmap.charMap["5"],
-        "six" to config.bitmap.charMap["6"],
-        "seven" to config.bitmap.charMap["7"],
-        "eight" to config.bitmap.charMap["8"],
-        "nine" to config.bitmap.charMap["9"],
+    val replacements = object2ObjectMapOf<String, Char?>(
+        "a" to config.bitmap.charMap['a'],
+        "b" to config.bitmap.charMap['b'],
+        "c" to config.bitmap.charMap['c'],
+        "d" to config.bitmap.charMap['d'],
+        "e" to config.bitmap.charMap['e'],
+        "f" to config.bitmap.charMap['f'],
+        "g" to config.bitmap.charMap['g'],
+        "h" to config.bitmap.charMap['h'],
+        "i" to config.bitmap.charMap['i'],
+        "j" to config.bitmap.charMap['j'],
+        "k" to config.bitmap.charMap['k'],
+        "l" to config.bitmap.charMap['l'],
+        "m" to config.bitmap.charMap['m'],
+        "n" to config.bitmap.charMap['n'],
+        "o" to config.bitmap.charMap['o'],
+        "p" to config.bitmap.charMap['p'],
+        "q" to config.bitmap.charMap['q'],
+        "r" to config.bitmap.charMap['r'],
+        "s" to config.bitmap.charMap['s'],
+        "t" to config.bitmap.charMap['t'],
+        "u" to config.bitmap.charMap['u'],
+        "v" to config.bitmap.charMap['v'],
+        "w" to config.bitmap.charMap['w'],
+        "x" to config.bitmap.charMap['x'],
+        "y" to config.bitmap.charMap['y'],
+        "z" to config.bitmap.charMap['z'],
+        "zero" to config.bitmap.charMap['0'],
+        "one" to config.bitmap.charMap['1'],
+        "two" to config.bitmap.charMap['2'],
+        "three" to config.bitmap.charMap['3'],
+        "four" to config.bitmap.charMap['4'],
+        "five" to config.bitmap.charMap['5'],
+        "six" to config.bitmap.charMap['6'],
+        "seven" to config.bitmap.charMap['7'],
+        "eight" to config.bitmap.charMap['8'],
+        "nine" to config.bitmap.charMap['9'],
 
         "acuteAccent" to config.acuteAccent.char,
         "ampersand" to config.ampersand.char,
@@ -128,8 +129,6 @@ suspend fun generateBitmapFromConfig(
         "squareBracketClose" to config.squareBracketClose.char,
         "spacerOne" to config.spacerOne.char,
         "spacerTwo" to config.spacerTwo.char,
-
-        "bitmapName" to config.bitmapName,
     )
 
     var filledTemplate = templateContent
@@ -137,6 +136,7 @@ suspend fun generateBitmapFromConfig(
         filledTemplate = filledTemplate.replace("{{$key}}", value.toString())
     }
 
+    filledTemplate = filledTemplate.replace("{{bitmapName}}", config.bitmapName)
     filledTemplate = filledTemplate.replace("TemplateBitmap", configName)
 
     val configOutputPath = outputPath / "$configName.kt"

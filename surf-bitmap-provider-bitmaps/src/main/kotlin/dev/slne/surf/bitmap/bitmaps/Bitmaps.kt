@@ -46,7 +46,7 @@ enum class Bitmaps(
     CLAN_BLITZBLISS(ClanBlitzbliss),
     CLAN_EGGCORE(ClanEggcore),
 
-    // Clan Blau
+    // Clan Blue
     CLAN_OCEANWAVE(ClanOceanwave),
     CLAN_FROSTBYTE(ClanFrostbyte),
     CLAN_DEEPDIVE(ClanDeepdive),
