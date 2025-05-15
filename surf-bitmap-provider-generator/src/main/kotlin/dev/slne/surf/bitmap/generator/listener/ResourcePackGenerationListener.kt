@@ -7,62 +7,58 @@ import dev.slne.surf.bitmap.generator.utils.generateBitmapFromConfig
 import dev.slne.surf.bitmap.generator.utils.readConfig
 import dev.slne.surf.surfapi.bukkit.api.extensions.server
 import dev.slne.surf.surfapi.core.api.util.mutableObjectSetOf
+import dev.slne.surf.surfapi.core.api.util.toObjectSet
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.div
+import kotlin.io.path.isRegularFile
+import kotlin.io.path.name
+import kotlin.io.path.nameWithoutExtension
+import kotlin.io.path.notExists
+import kotlin.io.path.relativeTo
+import kotlin.io.path.walk
 
 object ResourcePackGenerationListener : Listener {
 
+    @OptIn(ExperimentalPathApi::class)
     @EventHandler
     fun onNexoPostPackGenerate(event: NexoPostPackGenerateEvent) {
         val nexoPluginFolderPath = server.pluginsFolder.toPath() / "Nexo"
         val nexoGlyphsPath = nexoPluginFolderPath / "glyphs" / "bitmaps"
 
-        if (!Files.exists(nexoGlyphsPath)) {
-            return
-        }
+        if (nexoGlyphsPath.notExists()) return
 
-        val ymlConfigFilePaths = mutableObjectSetOf<Path>()
-        Files.walk(nexoGlyphsPath).forEach { path ->
-            if (path.toString().endsWith(".yml")) {
-                ymlConfigFilePaths.add(path)
-            }
-        }
+        val ymlConfigFilePaths = nexoGlyphsPath.walk()
+            .filter { it.isRegularFile() && it.name.endsWith(".yml") }
+            .toObjectSet()
 
         plugin.launch {
             val parsedYmlConfigFiles = ymlConfigFilePaths.map { it to readConfig(it) }
             val invalidYmlConfigFiles = parsedYmlConfigFiles.filter { it.second == null }
 
-            invalidYmlConfigFiles.forEach { invalid ->
-                plugin.logger.warning("Invalid YML config file: ${invalid.first}")
+            invalidYmlConfigFiles.forEach { (path) ->
+                plugin.logger.warning("Invalid YML config file: $path")
             }
 
-            val ymlConfigFiles = parsedYmlConfigFiles
-                .filter { it.second != null }
-                .map { it.first to it.second!! }
+            val validConfigs = parsedYmlConfigFiles.mapNotNull { (path, config) ->
+                config?.let { path to it }
+            }
 
-            ymlConfigFiles.forEach { ymlConfig ->
-                val config = ymlConfig.second
-                val fileName = ymlConfig.first.toString()
-                    .replace("plugins\\Nexo\\glyphs\\bitmaps", "")
-                    .replace("plugins/Nexo/glyphs/bitmaps", "")
-                    .replace("\\", "/")
-                    .replace(".yml", "")
-
-                val fileNamePascalCase = fileName
-                    .split("/")
-                    .map { it.replaceFirstChar { char -> char.uppercase() } }
-                    .joinToString("")
+            validConfigs.forEach { (path, config) ->
+                val relativePath = path.relativeTo(nexoGlyphsPath)
+                val pascalName = relativePath
+                    .joinToString("") { it.nameWithoutExtension.replaceFirstChar { c -> c.uppercase() } }
 
                 generateBitmapFromConfig(
-                    configName = fileNamePascalCase,
+                    configName = pascalName,
                     config = config
                 )
             }
 
-            plugin.logger.info("Wrote ${ymlConfigFiles.size} bitmap files to the bitmap directory.")
+            plugin.logger.info("Wrote ${validConfigs.size} bitmap files to the bitmap directory.")
         }
     }
 }
