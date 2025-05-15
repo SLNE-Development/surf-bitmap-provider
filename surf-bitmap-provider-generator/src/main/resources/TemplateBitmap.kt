@@ -67,6 +67,8 @@ object TemplateBitmap : BitmapProvider(
     tilde = '{{tilde}}',
     squareBracketOpen = '{{squareBracketOpen}}',
     squareBracketClose = '{{squareBracketClose}}',
+    slash = '{{slash}}',
+    backslash = '{{backslash}}',
     spacerOne = '{{spacerOne}}',
     spacerTwo = '{{spacerTwo}}',
 )

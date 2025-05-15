@@ -69,6 +69,8 @@ open class BitmapProvider(
     squareBracketClose: Char,
     squareBracketOpen: Char,
     tilde: Char,
+    slash: Char,
+    backslash: Char,
     private val spacerOne: Char,
     private val spacerTwo: Char,
 ) {
@@ -136,6 +138,8 @@ open class BitmapProvider(
         ']' to squareBracketClose,
         '[' to squareBracketOpen,
         '~' to tilde,
+        '/' to slash,
+        '\\' to backslash,
         '\t' to spacerOne,
         '\n' to spacerTwo,
     )
