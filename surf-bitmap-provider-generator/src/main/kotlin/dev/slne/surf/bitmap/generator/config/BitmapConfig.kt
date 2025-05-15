@@ -18,10 +18,8 @@ data class BitmapConfig(
     val char: List<String>? = null,
 ) {
     val charMap: Char2CharMap
-        get() = run {
-            val chars = char ?: return@run char2CharMapOf()
-
-            return@run char2CharMapOf(
+        get() = char?.let { chars ->
+            char2CharMapOf(
                 'a' to chars[0][0],
                 'b' to chars[0][1],
                 'c' to chars[0][2],
@@ -75,5 +73,6 @@ data class BitmapConfig(
                 '#' to chars[7][1],
                 '*' to chars[7][2]
             )
-        }
+        } ?: char2CharMapOf()
+
 }
