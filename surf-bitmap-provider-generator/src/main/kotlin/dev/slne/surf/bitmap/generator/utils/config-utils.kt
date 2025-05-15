@@ -160,15 +160,14 @@ suspend fun revertConfigKeys(configPath: Path, bitmapName: String): String =
         }
     }
 
+private val replaceConfigKeysPattern = """(?m)^([a-z0-9_]+):""".toRegex()
 suspend fun replaceConfigKeys(config: LetterConfig, configPath: Path): GeneratorResult =
     withContext(Dispatchers.IO) {
         val bitmapName = config.bitmapName
         val configFilePath = configPath / "$bitmapName.yml"
 
         val fileContent = Files.readString(configFilePath)
-        val keyRegex = Regex("""(?m)^([a-z0-9_]+):""")
-
-        val updatedContent = fileContent.replace(keyRegex) { match ->
+        val updatedContent = fileContent.replace(replaceConfigKeysPattern) { match ->
             val key = match.groupValues[1]
             "${bitmapName}_$key:"
         }
