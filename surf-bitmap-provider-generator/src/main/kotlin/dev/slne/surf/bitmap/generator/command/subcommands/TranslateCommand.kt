@@ -7,6 +7,7 @@ import dev.slne.surf.bitmap.bitmaps.Bitmaps
 import dev.slne.surf.bitmap.generator.utils.PermissionRegistry
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import org.bukkit.command.CommandSender
+import java.util.*
 
 fun CommandAPICommand.translateCommand() = subcommand("translate") {
     withPermission(PermissionRegistry.LETTERGEN_COMMAND_TRANSLATE)
@@ -80,12 +81,17 @@ private fun translateWithBitmapProvider(
     sender.sendText {
         appendPrefix()
 
-        success("Die Übersetzung von ")
+        primary(
+            "[${
+                bitmapProvider.name.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.getDefault()
+                    ) else it.toString()
+                }
+            }] "
+        )
         variableValue(translation)
-        success(" mit der Bitmap ")
-        variableValue(bitmapProvider.name)
-        success(" ist ")
+        success(" -> ")
         text(bitmapProvider.translateToString(translatable))
-        success(".")
     }
 }
