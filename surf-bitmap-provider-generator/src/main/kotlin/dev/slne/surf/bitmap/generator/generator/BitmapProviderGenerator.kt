@@ -9,6 +9,7 @@ import dev.slne.surf.bitmap.generator.utils.replaceConfigKeys
 import dev.slne.surf.bitmap.generator.utils.writeConfig
 import java.nio.file.Path
 import kotlin.io.path.div
+import kotlin.io.path.notExists
 
 class BitmapProviderGenerator(
     val name: String,
@@ -26,8 +27,7 @@ class BitmapProviderGenerator(
         return textureResult + configResult
     }
 
-    private fun checkPathExists(path: Path) = path.toFile().exists()
-    private fun checkPath(path: Path): Boolean = !checkPathExists(path) || override
+    private fun checkPath(path: Path): Boolean = path.notExists() || override
 
     private suspend fun generateTextures(): GeneratorResult {
         if (!checkPath(texturePath)) {
