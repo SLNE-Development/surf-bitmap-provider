@@ -7,7 +7,6 @@ import java.nio.file.Path
 import javax.imageio.ImageIO
 import kotlin.io.path.*
 
-@OptIn(ExperimentalPathApi::class)
 suspend fun recolorFolder(
     foregroundHex: String,
     backgroundHex: String,
