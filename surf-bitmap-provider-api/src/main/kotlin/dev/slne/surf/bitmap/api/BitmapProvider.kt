@@ -1,6 +1,7 @@
 package dev.slne.surf.bitmap.api
 
 open class BitmapProvider(
+    val name: String,
     a: String,
     b: String,
     c: String,

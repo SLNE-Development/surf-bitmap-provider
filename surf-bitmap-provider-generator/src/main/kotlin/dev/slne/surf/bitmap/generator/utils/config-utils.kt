@@ -128,6 +128,8 @@ suspend fun generateBitmapFromConfig(
         "squareBracketClose" to config.squareBracketClose.char,
         "spacerOne" to config.spacerOne.char,
         "spacerTwo" to config.spacerTwo.char,
+
+        "bitmapName" to config.bitmapName,
     )
 
     var filledTemplate = templateContent
