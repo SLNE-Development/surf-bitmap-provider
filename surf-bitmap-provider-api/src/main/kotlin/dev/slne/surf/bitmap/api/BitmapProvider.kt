@@ -1,8 +1,8 @@
 package dev.slne.surf.bitmap.api
 
 import dev.slne.surf.surfapi.core.api.util.char2CharMapOf
-import dev.slne.surf.surfapi.core.api.util.toCharList
-import dev.slne.surf.surfapi.core.api.util.toObjectList
+import dev.slne.surf.surfapi.core.api.util.mutableCharListOf
+import it.unimi.dsi.fastutil.chars.CharList
 
 open class BitmapProvider(
     val name: String,
@@ -150,10 +150,13 @@ open class BitmapProvider(
      * @param input The input string to be translated.
      * @return A list of characters where each character is either a glyph or the original character.
      */
-    open fun translateToGlyphs(input: String) = input
-        .map { translatedLettersToGlyph.getOrDefault(it.lowercaseChar(), it) }
-        .toCharList()
-        .toObjectList()
+    open fun translateToGlyphs(input: String): CharList = input
+        .mapTo(mutableCharListOf()) {
+            translatedLettersToGlyph.getOrDefault(
+                it.lowercaseChar(),
+                it
+            )
+        }
 
     /**
      * Translate a string to a formatted string with glyphs.
@@ -171,7 +174,7 @@ open class BitmapProvider(
             append(Spacing.NEGATIVE_SPACE_ONE.char)
 
             for (i in 0 until translated.size) {
-                append(translated[i])
+                append(translated.getChar(i))
                 if (i != translated.size - 1) {
                     append(Spacing.NEGATIVE_SPACE_ONE.char)
                 }
