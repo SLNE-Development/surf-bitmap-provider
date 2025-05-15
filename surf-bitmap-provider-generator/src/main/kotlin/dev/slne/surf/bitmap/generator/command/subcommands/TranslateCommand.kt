@@ -5,6 +5,8 @@ import dev.jorel.commandapi.kotlindsl.*
 import dev.slne.surf.bitmap.api.BitmapProvider
 import dev.slne.surf.bitmap.bitmaps.Bitmaps
 import dev.slne.surf.bitmap.generator.utils.PermissionRegistry
+import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
+import dev.slne.surf.surfapi.core.api.messages.adventure.clickCopiesToClipboard
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import org.bukkit.command.CommandSender
 import java.util.*
@@ -92,6 +94,16 @@ private fun translateWithBitmapProvider(
         )
         variableValue(translation)
         success(" -> ")
-        text(bitmapProvider.translateToString(translatable))
+        append {
+            val text = bitmapProvider.translateToString(translatable)
+            
+            text(text)
+
+            hoverEvent(buildText {
+                spacer("Klicke, zum kopieren")
+            })
+
+            clickCopiesToClipboard(text)
+        }
     }
 }
