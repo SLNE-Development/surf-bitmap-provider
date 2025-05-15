@@ -150,7 +150,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
 
                 info("Generierung für ")
                 variableValue(name)
-                info(" abegschlossen in ")
+                info(" abgeschlossen in ")
                 variableValue("${duration.inWholeMilliseconds}ms")
                 info(".")
             }
