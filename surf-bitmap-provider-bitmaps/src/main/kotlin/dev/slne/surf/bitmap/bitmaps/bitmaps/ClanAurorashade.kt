@@ -67,6 +67,8 @@ object ClanAurorashade : BitmapProvider(
     tilde = 'ꯢ',
     squareBracketOpen = 'ꯡ',
     squareBracketClose = 'ꯠ',
+    slash = 'ꮲ',
+    backslash = 'ꮳ',
     spacerOne = 'ꯞ',
     spacerTwo = 'ꯟ',
 )
