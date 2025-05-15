@@ -17,8 +17,9 @@ data class BitmapConfig(
     @Setting("char")
     val char: List<String>? = null,
 ) {
-    val charMap: Char2CharMap
-        get() = char?.let { chars ->
+    @delegate:Transient
+    val charMap: Char2CharMap by lazy {
+        char?.let { chars ->
             char2CharMapOf(
                 'a' to chars[0][0],
                 'b' to chars[0][1],
@@ -74,5 +75,6 @@ data class BitmapConfig(
                 '*' to chars[7][2]
             )
         } ?: char2CharMapOf()
+    }
 
 }
