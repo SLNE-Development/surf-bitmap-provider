@@ -18,7 +18,7 @@ suspend fun readConfig(
     configPath: Path
 ): LetterConfig? = withContext(Dispatchers.IO) {
     val bitmapName = configPath.fileName.toString().removeSuffix(".yml")
-    val rervertedConfig = revertConfigKeys(configPath, bitmapName)
+    val revertedConfig = revertConfigKeys(configPath, bitmapName)
     val node = YamlConfigurationLoader.builder()
         .path(configPath)
         .defaultOptions { options ->
@@ -26,7 +26,7 @@ suspend fun readConfig(
                 builder.registerAnnotatedObjects(objectMapperFactory())
             }
         }
-        .buildAndLoadString(rervertedConfig)
+        .buildAndLoadString(revertedConfig)
 
     return@withContext node.get<LetterConfig>()
 }
