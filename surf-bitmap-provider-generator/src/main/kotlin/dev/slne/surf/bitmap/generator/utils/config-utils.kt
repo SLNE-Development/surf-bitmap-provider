@@ -28,7 +28,7 @@ suspend fun readConfig(
         }
         .buildAndLoadString(revertedConfig)
 
-    return@withContext node.get<LetterConfig>()
+    node.get<LetterConfig>()
 }
 
 suspend fun writeConfig(
@@ -48,7 +48,7 @@ suspend fun writeConfig(
     val node = loader.createNode()
     node.set(config)
 
-    return@withContext runCatching {
+    runCatching {
         loader.save(node)
         GeneratorResult.FILE_GENERATED
     }.getOrNull() ?: GeneratorResult.FILE_NOT_GENERATED
@@ -154,7 +154,7 @@ suspend fun revertConfigKeys(configPath: Path, bitmapName: String): String =
         val fileContent = Files.readString(configPath)
         val keyRegex = Regex("""(?m)^${bitmapName}_([a-z0-9_]+):""")
 
-        return@withContext fileContent.replace(keyRegex) { match ->
+        fileContent.replace(keyRegex) { match ->
             val originalKey = match.groupValues[1]
             "$originalKey:"
         }
@@ -175,5 +175,5 @@ suspend fun replaceConfigKeys(config: LetterConfig, configPath: Path): Generator
 
         configFilePath.writeText(updatedContent)
 
-        return@withContext GeneratorResult.FILE_GENERATED
+        GeneratorResult.FILE_GENERATED
     }
