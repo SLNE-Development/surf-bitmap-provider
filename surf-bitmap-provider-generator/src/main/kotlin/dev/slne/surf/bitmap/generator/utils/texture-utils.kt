@@ -5,7 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.nio.file.Path
 import javax.imageio.ImageIO
+import kotlin.io.path.*
 
+@OptIn(ExperimentalPathApi::class)
 suspend fun recolorFolder(
     foregroundHex: String,
     backgroundHex: String,
@@ -14,40 +16,34 @@ suspend fun recolorFolder(
     inputForegroundHex: String = "ffffff",
     inputBackgroundHex: String = "000000",
 ): GeneratorResult = withContext(Dispatchers.IO) {
-    if (!inputPath.toFile().isDirectory) {
-        throw IllegalArgumentException("Input path is not a directory")
-    }
+    require(inputPath.isDirectory()) { "Input path is not a directory" }
+    outputPath.createDirectories()
 
-    if (!outputPath.toFile().exists()) {
-        outputPath.toFile().mkdirs()
-    }
+    inputPath.listDirectoryEntries().filter { it.isRegularFile() }
 
-    val files =
-        inputPath.toFile().listFiles() ?: return@withContext GeneratorResult.FILE_NOT_GENERATED
+    val files = inputPath.listDirectoryEntries().filter { it.isRegularFile() }
 
-    var result = GeneratorResult.FILE_GENERATED
+    if (files.isNotEmpty()) {
+        var result = GeneratorResult.FILE_GENERATED
 
-    for (file in files) {
-        if (file.isDirectory) {
-            continue
+        for (inputFilePath in files) {
+            val outputFilePath = outputPath.resolve(inputFilePath.name)
+            val recolorResult = recolorTexture(
+                foregroundHex,
+                backgroundHex,
+                inputFilePath,
+                outputFilePath,
+                inputForegroundHex,
+                inputBackgroundHex
+            )
+
+            result += recolorResult
         }
 
-        val inputFilePath = file.toPath()
-        val outputFilePath = outputPath.resolve(file.name)
-
-        val recolorResult = recolorTexture(
-            foregroundHex,
-            backgroundHex,
-            inputFilePath,
-            outputFilePath,
-            inputForegroundHex,
-            inputBackgroundHex
-        )
-
-        result += recolorResult
+        result
+    } else {
+        GeneratorResult.FILE_NOT_GENERATED
     }
-
-    return@withContext result
 }
 
 suspend fun recolorTexture(
@@ -62,10 +58,10 @@ suspend fun recolorTexture(
     val inputBackground = inputBackgroundHex.toInt(16)
     val foreground = foregroundHex.toInt(16)
     val background = backgroundHex.toInt(16)
-    
-    val image = runCatching { ImageIO.read(inputPath.toFile()) }.getOrElse {
-        return@withContext GeneratorResult.FILE_NOT_GENERATED
-    }
+
+    val image = runCatching { inputPath.inputStream().use { ImageIO.read(it) } }.getOrNull()
+        ?: return@withContext GeneratorResult.FILE_NOT_GENERATED
+
     val width = image.width
     val height = image.height
 
@@ -74,16 +70,17 @@ suspend fun recolorTexture(
             val pixelArgb = image.getRGB(x, y)
             val pixel = pixelArgb and 0x00FFFFFF
 
-            if (pixel == inputForeground) {
-                image.setRGB(x, y, foreground or (0xFF shl 24))
-            } else if (pixel == inputBackground) {
-                image.setRGB(x, y, background or (0xFF shl 24))
+            when (pixel) {
+                inputForeground -> image.setRGB(x, y, foreground or (0xFF shl 24))
+                inputBackground -> image.setRGB(x, y, background or (0xFF shl 24))
             }
         }
     }
 
     return@withContext runCatching {
-        ImageIO.write(image, "png", outputPath.toFile())
+        outputPath.outputStream().use { ImageIO.write(image, "png", it) }
         GeneratorResult.FILE_GENERATED
-    }.getOrNull() ?: GeneratorResult.FILE_NOT_GENERATED
+    }.getOrElse {
+        GeneratorResult.FILE_NOT_GENERATED
+    }
 }
