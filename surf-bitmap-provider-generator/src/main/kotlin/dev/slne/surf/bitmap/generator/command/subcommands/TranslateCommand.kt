@@ -76,6 +76,7 @@ private fun translateWithBitmapProvider(
     }
 
     val translatable = translation
+        .replace("{{section}}", "§")
         .replace(" ", "\\s")
         .replace("\\s", "\t")
         .replace("\\t", "\n")
@@ -96,7 +97,7 @@ private fun translateWithBitmapProvider(
         success(" -> ")
         append {
             val text = bitmapProvider.translateToString(translatable)
-            
+
             text(text)
 
             hoverEvent(buildText {
