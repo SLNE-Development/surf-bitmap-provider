@@ -55,4 +55,7 @@ enum class Bitmaps(
     RANK_PREMIUM(RankPremium),
     RANK_SUPPORTER(RankSupporter),
     RANK_VETERAN(RankVeteran),
+
+    // Event Bitmaps
+    EVENT_STONE(EventStone),
 }
