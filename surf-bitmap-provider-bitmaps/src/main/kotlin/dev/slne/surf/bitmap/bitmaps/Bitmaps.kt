@@ -46,6 +46,7 @@ enum class Bitmaps(
 
     // Rank Bitmaps
     RANK_ADMINISTRATOR(RankAdministrator),
+    RANK_SRMODERATOR(RankSrmoderator),
     RANK_BUILDER(RankBuilder),
     RANK_CONTENT(RankContent),
     RANK_CONTRIBUTOR(RankContributor),
