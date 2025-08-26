@@ -14,6 +14,7 @@ import kotlin.io.path.notExists
 class BitmapProviderGenerator(
     val name: String,
     val foregroundHex: String,
+    val shadowHex: String,
     val backgroundHex: String,
     val configPath: Path,
     val texturePath: Path,
@@ -36,6 +37,7 @@ class BitmapProviderGenerator(
 
         return recolorFolder(
             foregroundHex = foregroundHex,
+            shadowHex = shadowHex,
             backgroundHex = backgroundHex,
             inputPath = plugin.dataPath / "raw",
             outputPath = texturePath,
@@ -48,43 +50,45 @@ class BitmapProviderGenerator(
         }
 
         val texturePathString = texturePath.toString()
-            .replace("plugins\\Nexo\\pack\\assets\\minecraft\\textures\\", "")
-            .replace("plugins/Nexo/pack/assets/minecraft/textures/", "")
+            .replace("plugins\\Nexo\\pack\\assets\\surf\\textures\\", "")
+            .replace("plugins/Nexo/pack/assets/surf/textures/", "")
             .replace("\\", "/")
+
+        val prefixedTexturePathString = "surf:$texturePathString"
 
         val config = LetterConfig(
             bitmapName = name,
-            acuteAccent = OneLetterConfig("${texturePathString}/acute_accent.png"),
-            ampersand = OneLetterConfig("${texturePathString}/ampersand.png"),
-            bracketClose = OneLetterConfig("${texturePathString}/bracket_close.png"),
-            bracketOpen = OneLetterConfig("${texturePathString}/bracket_open.png"),
-            circumflex = OneLetterConfig("${texturePathString}/circumflex.png"),
-            colon = OneLetterConfig("${texturePathString}/colon.png"),
-            comma = OneLetterConfig("${texturePathString}/comma.png"),
-            curlyBracketOpen = OneLetterConfig("${texturePathString}/curly_bracket_open.png"),
-            curlyBracketClose = OneLetterConfig("${texturePathString}/curly_bracket_close.png"),
-            degree = OneLetterConfig("${texturePathString}/degree.png"),
-            dollar = OneLetterConfig("${texturePathString}/dollar.png"),
-            dot = OneLetterConfig("${texturePathString}/dot.png"),
-            doubleQuote = OneLetterConfig("${texturePathString}/double_quote.png"),
-            euro = OneLetterConfig("${texturePathString}/euro.png"),
-            exclamationMark = OneLetterConfig("${texturePathString}/exclamation_mark.png"),
-            graveAccent = OneLetterConfig("${texturePathString}/grave_accent.png"),
-            greaterThan = OneLetterConfig("${texturePathString}/greater_than.png"),
-            hyphen = OneLetterConfig("${texturePathString}/hyphen.png"),
-            lessThan = OneLetterConfig("${texturePathString}/less_than.png"),
-            pipe = OneLetterConfig("${texturePathString}/pipe.png"),
-            questionMark = OneLetterConfig("${texturePathString}/question_mark.png"),
-            section = OneLetterConfig("${texturePathString}/section.png"),
-            semicolon = OneLetterConfig("${texturePathString}/semicolon.png"),
-            singleQuote = OneLetterConfig("${texturePathString}/single_quote.png"),
-            spacerOne = OneLetterConfig("${texturePathString}/spacer_one.png"),
-            spacerTwo = OneLetterConfig("${texturePathString}/spacer_two.png"),
-            squareBracketClose = OneLetterConfig("${texturePathString}/square_bracket_close.png"),
-            squareBracketOpen = OneLetterConfig("${texturePathString}/square_bracket_open.png"),
-            tilde = OneLetterConfig("${texturePathString}/tilde.png"),
+            acuteAccent = OneLetterConfig("${prefixedTexturePathString}/acute_accent.png"),
+            ampersand = OneLetterConfig("${prefixedTexturePathString}/ampersand.png"),
+            bracketClose = OneLetterConfig("${prefixedTexturePathString}/bracket_close.png"),
+            bracketOpen = OneLetterConfig("${prefixedTexturePathString}/bracket_open.png"),
+            circumflex = OneLetterConfig("${prefixedTexturePathString}/circumflex.png"),
+            colon = OneLetterConfig("${prefixedTexturePathString}/colon.png"),
+            comma = OneLetterConfig("${prefixedTexturePathString}/comma.png"),
+            curlyBracketOpen = OneLetterConfig("${prefixedTexturePathString}/curly_bracket_open.png"),
+            curlyBracketClose = OneLetterConfig("${prefixedTexturePathString}/curly_bracket_close.png"),
+            degree = OneLetterConfig("${prefixedTexturePathString}/degree.png"),
+            dollar = OneLetterConfig("${prefixedTexturePathString}/dollar.png"),
+            dot = OneLetterConfig("${prefixedTexturePathString}/dot.png"),
+            doubleQuote = OneLetterConfig("${prefixedTexturePathString}/double_quote.png"),
+            euro = OneLetterConfig("${prefixedTexturePathString}/euro.png"),
+            exclamationMark = OneLetterConfig("${prefixedTexturePathString}/exclamation_mark.png"),
+            graveAccent = OneLetterConfig("${prefixedTexturePathString}/grave_accent.png"),
+            greaterThan = OneLetterConfig("${prefixedTexturePathString}/greater_than.png"),
+            hyphen = OneLetterConfig("${prefixedTexturePathString}/hyphen.png"),
+            lessThan = OneLetterConfig("${prefixedTexturePathString}/less_than.png"),
+            pipe = OneLetterConfig("${prefixedTexturePathString}/pipe.png"),
+            questionMark = OneLetterConfig("${prefixedTexturePathString}/question_mark.png"),
+            section = OneLetterConfig("${prefixedTexturePathString}/section.png"),
+            semicolon = OneLetterConfig("${prefixedTexturePathString}/semicolon.png"),
+            singleQuote = OneLetterConfig("${prefixedTexturePathString}/single_quote.png"),
+            spacerOne = OneLetterConfig("${prefixedTexturePathString}/spacer_one.png"),
+            spacerTwo = OneLetterConfig("${prefixedTexturePathString}/spacer_two.png"),
+            squareBracketClose = OneLetterConfig("${prefixedTexturePathString}/square_bracket_close.png"),
+            squareBracketOpen = OneLetterConfig("${prefixedTexturePathString}/square_bracket_open.png"),
+            tilde = OneLetterConfig("${prefixedTexturePathString}/tilde.png"),
             bitmap = BitmapConfig(
-                texture = "${texturePathString}/bitmap.png",
+                texture = "${prefixedTexturePathString}/bitmap.png",
                 rows = 8,
                 columns = 6
             ),

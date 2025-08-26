@@ -18,6 +18,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
 
     textArgument("name")
     textArgument("foregroundHex")
+    textArgument("shadowHex")
     textArgument("backgroundHex")
     textArgument("configPath")
     textArgument("texturePath")
@@ -26,6 +27,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
     anyExecutor { sender, args ->
         val name: String by args
         val foregroundHex: String by args
+        val shadowHex: String by args
         val backgroundHex: String by args
         val configPath: String by args
         val texturePath: String by args
@@ -42,6 +44,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
         }
 
         val realForegroundHex = foregroundHex.replace("#", "")
+        val realShadowHex = shadowHex.replace("#", "")
         val realBackgroundHex = backgroundHex.replace("#", "")
 
         if (realForegroundHex.length != 6 || realBackgroundHex.length != 6) {
@@ -87,7 +90,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
         val nexoPluginFolderPath = server.pluginsFolder.toPath() / "Nexo"
         val nexoGlyphsPath = nexoPluginFolderPath / "glyphs" / "bitmaps"
         val nexoTexturesPath =
-            nexoPluginFolderPath / "pack" / "assets" / "minecraft" / "textures" / "bitmaps"
+            nexoPluginFolderPath / "pack" / "assets" / "surf" / "textures" / "bitmaps"
 
         val realConfigPath = nexoGlyphsPath / configPath
         val realTexturePath = nexoTexturesPath / texturePath / name
@@ -95,6 +98,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
         val generator = BitmapProviderGenerator(
             name = name,
             foregroundHex = realForegroundHex,
+            shadowHex = realShadowHex,
             backgroundHex = realBackgroundHex,
             configPath = realConfigPath,
             texturePath = realTexturePath,
@@ -109,6 +113,7 @@ fun CommandAPICommand.generateCommand() = subcommand("generate") {
 
             sendOptionLine(sender, "Name", name)
             sendOptionLine(sender, "Foreground", foregroundHex)
+            sendOptionLine(sender, "Shadow", realShadowHex)
             sendOptionLine(sender, "Background", backgroundHex)
             sendOptionLine(sender, "Config Path", configPath)
             sendOptionLine(sender, "Texture Path", texturePath)
