@@ -1,4 +1,4 @@
-package dev.slne.surf.bitmap.bitmaps.bitmaps
+package dev.slne.surf.bitmap.bitmaps.bitmaps.clans
 
 import dev.slne.surf.bitmap.api.BitmapProvider
 

@@ -3,7 +3,7 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps.ranks
 import dev.slne.surf.bitmap.api.BitmapProvider
 
 object RanksOtherTeam : BitmapProvider(
-    name = "other_team",
+    name = "otherTeam",
     a = 'ꔁ',
     b = 'ꔂ',
     c = 'ꔃ',
