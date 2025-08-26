@@ -14,7 +14,7 @@ enum class Bitmaps(
     RANK_ADMIN(RanksAdmin),
     RANK_DEV(RanksDev),
     RANK_SUPPORT(RanksSupport),
-    RANK_TEAM_OTHER(RanksOtherTeam),
-    RANK_PLAYER_OTHER(RanksOtherPlayer),
+    RANK_TEAM_OTHER(RanksOtherteam),
+    RANK_PLAYER_OTHER(RanksOtherplayer),
     RANK_PLAYER(RanksPlayer)
 }

@@ -2,8 +2,8 @@ package dev.slne.surf.bitmap.bitmaps.bitmaps.ranks
 
 import dev.slne.surf.bitmap.api.BitmapProvider
 
-object RanksOtherPlayer : BitmapProvider(
-    name = "otherPlayer",
+object RanksOtherplayer : BitmapProvider(
+    name = "otherplayer",
     a = '꒴',
     b = '꒵',
     c = '꒶',
