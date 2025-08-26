@@ -5,28 +5,28 @@ import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
 import dev.slne.surf.bitmap.bitmaps.Bitmaps
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
-import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap
 
 fun CommandAPICommand.translateDefaultCommand() = subcommand("translateDefault") {
     withPermission("surf.bitmap.generator.command.translate-default")
 
     playerExecutor { player, args ->
-        val map = mutableObject2ObjectMapOf(
-            "Admin" to Bitmaps.RANK_ADMIN,
-            "Management" to Bitmaps.RANK_MANAGEMENT,
-            "Entwicklung" to Bitmaps.RANK_DEV,
-            "Moderation" to Bitmaps.RANK_SUPPORT,
-            "Support" to Bitmaps.RANK_SUPPORT,
-            "Designer" to Bitmaps.RANK_TEAM_OTHER,
-            "Builder" to Bitmaps.RANK_TEAM_OTHER,
-            "Community" to Bitmaps.RANK_TEAM_OTHER,
-            "Creator" to Bitmaps.RANK_CONTENT,
-            "Contributor" to Bitmaps.RANK_PLAYER_OTHER,
-            "Veteran" to Bitmaps.RANK_PLAYER_OTHER,
-            "Premium+" to Bitmaps.RANK_PREMIUM,
-            "Premium" to Bitmaps.RANK_PREMIUM,
-            "Spieler" to Bitmaps.RANK_PLAYER
-        )
+        val map = Object2ObjectLinkedOpenHashMap<String, Bitmaps>()
+        
+        map["Admin"] = Bitmaps.RANK_ADMIN
+        map["Management"] = Bitmaps.RANK_MANAGEMENT
+        map["Entwicklung"] = Bitmaps.RANK_DEV
+        map["Moderation"] = Bitmaps.RANK_SUPPORT
+        map["Support"] = Bitmaps.RANK_SUPPORT
+        map["Designer"] = Bitmaps.RANK_TEAM_OTHER
+        map["Builder"] = Bitmaps.RANK_TEAM_OTHER
+        map["Community"] = Bitmaps.RANK_TEAM_OTHER
+        map["Creator"] = Bitmaps.RANK_CONTENT
+        map["Contributor"] = Bitmaps.RANK_PLAYER_OTHER
+        map["Veteran"] = Bitmaps.RANK_PLAYER_OTHER
+        map["Premium+"] = Bitmaps.RANK_PREMIUM
+        map["Premium"] = Bitmaps.RANK_PREMIUM
+        map["Spieler"] = Bitmaps.RANK_PLAYER
 
         player.sendText {
             appendPrefix()
