@@ -6,7 +6,6 @@ import dev.jorel.commandapi.kotlindsl.subcommand
 import dev.slne.surf.bitmap.bitmaps.Bitmaps
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
-import dev.slne.surf.surfapi.core.api.util.toObjectList
 
 fun CommandAPICommand.translateDefaultCommand() = subcommand("translateDefault") {
     withPermission("surf.bitmap.generator.command.translate-default")
@@ -35,7 +34,8 @@ fun CommandAPICommand.translateDefaultCommand() = subcommand("translateDefault")
             appendNewPrefixedLine()
             appendNewPrefixedLine()
 
-            map.toObjectList().forEachIndexed { index, (key, value) ->
+            var index = 0
+            map.forEach { (key, value) ->
                 if (index != 0) {
                     appendNewPrefixedLine()
                 }
@@ -43,6 +43,8 @@ fun CommandAPICommand.translateDefaultCommand() = subcommand("translateDefault")
                 variableKey(key)
                 appendSpace()
                 text(value.provider.translateToString(key))
+
+                index++
             }
         }
     }
