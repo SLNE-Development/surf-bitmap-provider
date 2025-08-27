@@ -6,8 +6,10 @@ plugins {
 }
 
 surfPaperPluginApi {
-    mainClass("dev.slne.surf.bitmap.generator.BitmapGeneratorPlugin")
+    mainClass("dev.slne.surf.bitmap.generator.BitmapProviderPlugin")
     authors.add("Ammo")
+
+    generateLibraryLoader(false)
 
     serverDependencies {
         registerRequired("Nexo")
