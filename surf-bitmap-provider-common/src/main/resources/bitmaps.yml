@@ -11,6 +11,12 @@ bitmap_bitmap:
     - ꐯꐰꐱꐲꐳꐴ
     - ꐵꐶꐷꐸꐹꐺ
     - ꐻꐼꐽꐾꐿꑀ
+    
+bitmap_pixel_9:
+  height: 9
+  ascent: 9
+  texture: surf:bitmaps/pixels/pixel_9.png
+  char: ꑚ
 
 bitmap_background:
   height: 7

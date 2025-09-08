@@ -15,6 +15,17 @@ import kotlin.math.abs
 const val BITMAP_BACKGROUND = 'ꑁ'
 
 /**
+ * An enumeration to represent different pixel types using a character symbol.
+ *
+ * @property char The character representation of the pixel.
+ */
+enum class Pixels(
+    val char: Char
+) {
+    PIXEL_9('ꑚ')
+}
+
+/**
  * Represents a set of constants for negative and positive spacing values represented
  * by specific characters. Each constant defines a unique spacing value and its corresponding
  * character representation.
@@ -62,7 +73,7 @@ enum class Spacing(val char: Char, val spacing: Int) {
                 .sortedByDescending { abs(it.spacing) }
                 .toTypedArray()
         )
-        
+
         /**
          * A collection of predefined spacing objects with positive spacing values, sorted in descending order by spacing.
          *
