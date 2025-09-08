@@ -1,5 +1,5 @@
 rootProject.name = "surf-bitmap-provider"
 
-include("surf-bitmap-provider-api")
-include("surf-bitmap-provider-bitmaps")
-include("surf-bitmap-provider-generator")
+include("surf-bitmap-provider-common")
+include("surf-bitmap-provider-paper")
+include("surf-bitmap-provider-velocity")

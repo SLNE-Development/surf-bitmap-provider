@@ -1,0 +1,180 @@
+bitmap_bitmap:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/bitmap.png
+  char:
+  - ꐑꐒꐓꐔꐕꐖ
+  - ꐗꐘꐙꐚꐛꐜ
+  - ꐝꐞꐟꐠꐡꐢ
+  - ꐣꐤꐥꐦꐧꐨ
+  - ꐩꐪꐫꐬꐭꐮ
+  - ꐯꐰꐱꐲꐳꐴ
+  - ꐵꐶꐷꐸꐹꐺ
+  - ꐻꐼꐽꐾꐿꑀ
+
+bitmap_background:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/background.png
+  char: ꑁ
+
+bitmap_acute_accent:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/acute_accent.png
+  char: ꑂ
+
+bitmap_ampersand:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/ampersand.png
+  char: ꑃ
+
+bitmap_bracket_close:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/bracket_close.png
+  char: ꑄ
+
+bitmap_bracket_open:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/bracket_open.png
+  char: ꑅ
+
+bitmap_circumflex:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/circumflex.png
+  char: ꑆ
+
+bitmap_colon:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/colon.png
+  char: ꑇ
+
+bitmap_comma:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/comma.png
+  char: ꑉ
+
+bitmap_curly_bracket_close:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/curly_bracket_close.png
+  char: ꑊ
+
+bitmap_curly_bracket_open:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/curly_bracket_open.png
+  char: ꑋ
+
+bitmap_degree:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/degree.png
+  char: ꑌ
+
+bitmap_dollar:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/dollar.png
+  char: ꑍ
+
+bitmap_dot:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/dot.png
+  char: ꑔ
+
+bitmap_double_quote:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/double_quote.png
+  char: ꑕ
+
+bitmap_euro:
+  template: bitmap_template
+  texture: surf:bitmaps/euro.png
+  char: ꑖ
+
+bitmap_exclamation_mark:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/exclamation_mark.png
+  char: ꑗ
+
+bitmap_grave_accent:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/grave_accent.png
+  char: ꑘ
+
+bitmap_greater_than:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/greater_than.png
+  char: ꑙ
+
+bitmap_hyphen:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/hyphen.png
+  char: ꑚ
+
+bitmap_less_than:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/less_than.png
+  char: ꑛ
+
+bitmap_pipe:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/pipe.png
+  char: ꑜ
+
+bitmap_question_mark:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/question_mark.png
+  char: ꑝ
+
+bitmap_section:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/section.png
+  char: ꑞ
+
+bitmap_semicolon:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/semicolon.png
+  char: ꑟ
+
+bitmap_single_quote:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/single_quote.png
+  char: ꑠ
+
+bitmap_square_bracket_close:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/square_bracket_close.png
+  char: ꑡ
+
+bitmap_square_bracket_open:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/square_bracket_open.png
+  char: ꑢ
+
+bitmap_tilde:
+  height: 7
+  ascent: 7
+  texture: surf:bitmaps/tilde.png
+  char: ꑣ
