@@ -84,7 +84,7 @@ object BitmapProvider {
         foregroundColor: TextColor,
         shadowColor: TextColor?,
         backgroundColor: TextColor,
-        affixAmount: Int = 1
+        affixAmount: Int = 2
     ) = buildText {
         val translated = translateToCharProviders(input)
         val background = translated.map { it.generateBackground() }
@@ -183,7 +183,7 @@ object BitmapProvider {
         foregroundColor: TextColor,
         shadowColor: TextColor?,
         backgroundColor: TextColor,
-        affixAmount: Int = 1
+        affixAmount: Int = 2
     ) = MiniMessage.miniMessage()
         .serialize(
             translateToComponent(
