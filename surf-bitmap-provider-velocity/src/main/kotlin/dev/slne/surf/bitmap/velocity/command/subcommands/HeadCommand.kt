@@ -10,7 +10,6 @@ import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import dev.slne.surf.surfapi.core.api.messages.adventure.text
 import dev.slne.surf.surfapi.core.api.service.PlayerLookupService
-import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 
 fun CommandAPICommand.headCommand() = subcommand("head") {
@@ -38,28 +37,25 @@ fun CommandAPICommand.headCommand() = subcommand("head") {
 
             val head = getHeadRowsByUuid(playerUuid, usableScale)
 
-            val extraText = mutableListOf<Component>()
-            extraText.add(text(""))
-            extraText.add(text(""))
-            extraText.add(buildText {
-                repeat(3) { appendSpace() }
-
-                primary("Special-Drop", TextDecoration.BOLD)
-            })
-            extraText.add(text(""))
-
-            extraText.add(buildText {
-                repeat(3) { appendSpace() }
-
-                variableValue(playerName)
-            })
-            extraText.add(buildText {
-                repeat(3) { appendSpace() }
-
-                spacer("hat eine ")
-                variableValue("Elytra")
-                spacer(" erhalten!")
-            })
+            val extraText = listOf(
+                text(""),
+                text(""),
+                buildText {
+                    repeat(3) { appendSpace() }
+                    primary("Special-Drop", TextDecoration.BOLD)
+                },
+                text(""),
+                buildText {
+                    repeat(3) { appendSpace() }
+                    variableValue(playerName)
+                },
+                buildText {
+                    repeat(3) { appendSpace() }
+                    spacer("hat eine ")
+                    variableValue("Elytra")
+                    spacer(" erhalten!")
+                }
+            )
 
             sender.sendText {
                 append(composeHead(head, extraText))
