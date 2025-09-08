@@ -90,9 +90,15 @@ object BitmapProvider {
         val background = translated.map { it.generateBackground() }
         val glyphs = translated.map { it.char }
 
+        val backgroundString = if (shadowColor != null) {
+            background.joinToString(Spacing.NEGATIVE_SPACE_ONE.char.toString())
+        } else {
+            background.joinToString(Spacing.NEGATIVE_SPACE_ONE.char.toString()).dropLast(2)
+        }
+
         append {
             appendAffix(affixAmount, true, backgroundColor)
-            text(background.joinToString(Spacing.NEGATIVE_SPACE_ONE.char.toString()))
+            text(backgroundString)
             appendAffix(affixAmount, false, backgroundColor)
 
             color(backgroundColor)
@@ -105,12 +111,18 @@ object BitmapProvider {
         val backshift = if (shadowColor != null) {
             -translated.sumOf { it.width } - 1
         } else {
-            -translated.sumOf { it.width } - affixAmount - 1
+            -translated.sumOf { it.width } - affixAmount
         }
 
         appendGlyphs(glyphs, backshift, foregroundColor)
 
-        text(calculateGlyphSpacing(affixAmount))
+        val frontshift = if (shadowColor != null) {
+            affixAmount + 1
+        } else {
+            affixAmount
+        }
+
+        text(calculateGlyphSpacing(frontshift))
         text("<reset>")
     }
 
