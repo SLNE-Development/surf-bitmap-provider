@@ -3,14 +3,14 @@ bitmap_bitmap:
   ascent: 7
   texture: surf:bitmaps/bitmap.png
   char:
-  - ꐑꐒꐓꐔꐕꐖ
-  - ꐗꐘꐙꐚꐛꐜ
-  - ꐝꐞꐟꐠꐡꐢ
-  - ꐣꐤꐥꐦꐧꐨ
-  - ꐩꐪꐫꐬꐭꐮ
-  - ꐯꐰꐱꐲꐳꐴ
-  - ꐵꐶꐷꐸꐹꐺ
-  - ꐻꐼꐽꐾꐿꑀ
+    - ꐑꐒꐓꐔꐕꐖ
+    - ꐗꐘꐙꐚꐛꐜ
+    - ꐝꐞꐟꐠꐡꐢ
+    - ꐣꐤꐥꐦꐧꐨ
+    - ꐩꐪꐫꐬꐭꐮ
+    - ꐯꐰꐱꐲꐳꐴ
+    - ꐵꐶꐷꐸꐹꐺ
+    - ꐻꐼꐽꐾꐿꑀ
 
 bitmap_background:
   height: 7
@@ -118,12 +118,6 @@ bitmap_greater_than:
   ascent: 7
   texture: surf:bitmaps/greater_than.png
   char: ꑙ
-
-bitmap_hyphen:
-  height: 7
-  ascent: 7
-  texture: surf:bitmaps/hyphen.png
-  char: ꑚ
 
 bitmap_less_than:
   height: 7

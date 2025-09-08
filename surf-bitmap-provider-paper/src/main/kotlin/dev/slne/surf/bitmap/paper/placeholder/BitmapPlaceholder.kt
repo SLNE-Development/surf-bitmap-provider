@@ -12,13 +12,21 @@ object BitmapPlaceholder : PapiPlaceholder("translate") {
         args: List<String>
     ): String {
         val foregroundHex = args[0]
-        val backgroundHex = args[1]
-        val affixAmount = args[2].toInt()
-        val text = args.subList(3, args.size).joinToString(" ")
+        val shadowHex = args[1]
+        val backgroundHex = args[2]
+        val affixAmount = args[3].toInt()
+        val text = args.subList(4, args.size).joinToString(" ")
 
         val foregroundColor = TextColor.fromHexString(foregroundHex) ?: NamedTextColor.WHITE
+        val shadowColor = TextColor.fromHexString(shadowHex)
         val backgroundColor = TextColor.fromHexString(backgroundHex) ?: NamedTextColor.BLACK
 
-        return BitmapProvider.translateToString(text, foregroundColor, backgroundColor, affixAmount)
+        return BitmapProvider.translateToString(
+            text,
+            foregroundColor,
+            shadowColor,
+            backgroundColor,
+            affixAmount
+        )
     }
 }

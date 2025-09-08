@@ -14,18 +14,22 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
     withPermission(PermissionRegistry.LETTERGEN_COMMAND_TRANSLATE)
 
     textArgument("foregroundColorInput")
+    textArgument("shadowColorInput")
     textArgument("backgroundColorInput")
     integerArgument("affixAmount")
     greedyStringArgument("input")
 
     anyExecutor { sender, args ->
         val foregroundColorInput: String by args
+        val shadowColorInput: String by args
         val backgroundColorInput: String by args
         val affixAmount: Int by args
         val input: String by args
 
         val foregroundColor =
             TextColor.fromCSSHexString(foregroundColorInput) ?: NamedTextColor.WHITE
+        val shadowColor =
+            TextColor.fromCSSHexString(shadowColorInput)
         val backgroundColor =
             TextColor.fromCSSHexString(backgroundColorInput) ?: NamedTextColor.BLACK
 
@@ -42,6 +46,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
                     BitmapProvider.translateToComponent(
                         input,
                         foregroundColor,
+                        shadowColor,
                         backgroundColor,
                         affixAmount
                     )
@@ -55,6 +60,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
                     BitmapProvider.translateToString(
                         input,
                         foregroundColor,
+                        shadowColor,
                         backgroundColor,
                         affixAmount
                     )

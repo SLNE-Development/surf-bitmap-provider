@@ -9,6 +9,7 @@ import net.kyori.adventure.text.minimessage.tag.Tag
 val BitmapMiniPlaceholderExpansion = Expansion.builder("bitmap")
     .globalPlaceholder("translate") { queue, ctx ->
         val foregroundColorInput = queue.popOr { "foreground is required" }.value()
+        val shadowColorInput = queue.popOr { "shadow is required" }.value()
         val backgroundColorInput = queue.popOr { "background is required" }.value()
         val affixAmount = queue.popOr { "affix amount is required" }.asInt().asInt
         val input = buildString {
@@ -20,12 +21,14 @@ val BitmapMiniPlaceholderExpansion = Expansion.builder("bitmap")
         }
 
         val foregroundColor = TextColor.fromHexString(foregroundColorInput) ?: NamedTextColor.WHITE
+        val shadowColor = TextColor.fromHexString(shadowColorInput)
         val backgroundColor = TextColor.fromHexString(backgroundColorInput) ?: NamedTextColor.BLACK
 
         Tag.selfClosingInserting(
             BitmapProvider.translateToComponent(
                 input,
                 foregroundColor,
+                shadowColor,
                 backgroundColor,
                 affixAmount
             )

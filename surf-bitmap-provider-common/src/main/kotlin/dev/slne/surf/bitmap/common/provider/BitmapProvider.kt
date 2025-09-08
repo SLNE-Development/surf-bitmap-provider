@@ -73,6 +73,7 @@ object BitmapProvider {
      *
      * @param input The string to be translated into a text component.
      * @param foregroundColor The foreground color to apply to the characters in the text component.
+     * @param shadowColor The shadow color to apply to the characters in the text component. Can be null, then no shadow is applied.
      * @param backgroundColor The background color to apply behind the characters in the text component.
      * @param affixAmount The number of affix characters to add on each side of the text component for padding.
      *
@@ -81,14 +82,13 @@ object BitmapProvider {
     fun translateToComponent(
         input: String,
         foregroundColor: TextColor,
+        shadowColor: TextColor?,
         backgroundColor: TextColor,
         affixAmount: Int = 1
     ) = buildText {
         val translated = translateToCharProviders(input)
         val background = translated.map { it.generateBackground() }
         val glyphs = translated.map { it.char }
-        val backshift =
-            calculateGlyphSpacing(-translated.sumOf { it.width } - 1 - affixAmount)
 
         append {
             appendAffix(affixAmount, true, backgroundColor)
@@ -98,15 +98,36 @@ object BitmapProvider {
             color(backgroundColor)
         }
 
-        append {
-            text(backshift)
-            text(glyphs.joinToString(Spacing.NEGATIVE_SPACE_ONE.char.toString()))
-
-            color(foregroundColor)
-            shadowColor(ShadowColor.none())
+        if (shadowColor != null) {
+            appendGlyphs(glyphs, -translated.sumOf { it.width } - affixAmount, shadowColor)
         }
 
+        val backshift = if (shadowColor != null) {
+            -translated.sumOf { it.width } - 1
+        } else {
+            -translated.sumOf { it.width } - affixAmount - 1
+        }
+
+        appendGlyphs(glyphs, backshift, foregroundColor)
+
+        text(calculateGlyphSpacing(affixAmount))
         text("<reset>")
+    }
+
+    private fun SurfComponentBuilder.appendGlyphs(
+        glyphs: List<Char>,
+        backshift: Int,
+        color: TextColor,
+    ) {
+        val backshift = calculateGlyphSpacing(backshift)
+
+        append {
+            text(backshift)
+            text(glyphs.joinToString(""))
+
+            color(color)
+            shadowColor(ShadowColor.none())
+        }
     }
 
     private fun SurfComponentBuilder.appendAffix(
@@ -139,6 +160,7 @@ object BitmapProvider {
      *
      * @param input The input string that will be translated into a serialized string.
      * @param foregroundColor The color to be applied as the foreground for the text.
+     * @param shadowColor The shadow color to apply to the characters in the text component. Can be null, then no shadow is applied.
      * @param backgroundColor The color to be applied as the background for the text.
      * @param affixAmount The number of affix characters to add on each side of the text for padding.
      *
@@ -147,9 +169,18 @@ object BitmapProvider {
     fun translateToString(
         input: String,
         foregroundColor: TextColor,
+        shadowColor: TextColor?,
         backgroundColor: TextColor,
         affixAmount: Int = 1
     ) = MiniMessage.miniMessage()
-        .serialize(translateToComponent(input, foregroundColor, backgroundColor, affixAmount))
+        .serialize(
+            translateToComponent(
+                input,
+                foregroundColor,
+                shadowColor,
+                backgroundColor,
+                affixAmount
+            )
+        )
 
 }
