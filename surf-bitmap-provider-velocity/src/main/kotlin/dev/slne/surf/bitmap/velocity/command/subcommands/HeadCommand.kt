@@ -67,13 +67,3 @@ fun CommandAPICommand.headCommand() = subcommand("head") {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
