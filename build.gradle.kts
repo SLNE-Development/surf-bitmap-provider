@@ -9,6 +9,6 @@ buildscript {
 }
 
 allprojects {
-    group = "dev.slne.surf"
+    group = "dev.slne.surf.bitmap"
     version = findProperty("version") as String
 }
