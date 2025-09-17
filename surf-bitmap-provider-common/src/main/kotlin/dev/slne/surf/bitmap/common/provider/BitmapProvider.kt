@@ -86,6 +86,7 @@ object BitmapProvider {
         backgroundColor: TextColor,
         affixAmount: Int = 2
     ) = buildText {
+        val input = input.lowercase()
         val translated = translateToCharProviders(input)
         val background = translated.map { it.generateBackground() }
         val glyphs = translated.map { it.char }

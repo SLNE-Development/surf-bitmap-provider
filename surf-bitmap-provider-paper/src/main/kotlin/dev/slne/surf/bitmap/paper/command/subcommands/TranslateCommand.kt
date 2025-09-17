@@ -1,9 +1,9 @@
-package dev.slne.surf.bitmap.velocity.command.subcommands
+package dev.slne.surf.bitmap.paper.command.subcommands
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.*
 import dev.slne.surf.bitmap.common.provider.BitmapProvider
-import dev.slne.surf.bitmap.velocity.command.PermissionRegistry
+import dev.slne.surf.bitmap.paper.command.PermissionRegistry
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import dev.slne.surf.surfapi.core.api.messages.adventure.clickCopiesToClipboard
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText

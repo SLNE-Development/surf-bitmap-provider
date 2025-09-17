@@ -1,11 +1,12 @@
-package dev.slne.surf.bitmap.velocity.command.subcommands
+package dev.slne.surf.bitmap.paper.command.subcommands
 
-import com.github.shynixn.mccoroutine.velocity.launch
+import com.github.shynixn.mccoroutine.folia.launch
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.*
 import dev.slne.surf.bitmap.common.head.composeHead
 import dev.slne.surf.bitmap.common.head.getHeadRowsByUuid
-import dev.slne.surf.bitmap.velocity.container
+import dev.slne.surf.bitmap.paper.command.PermissionRegistry
+import dev.slne.surf.bitmap.paper.plugin
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import dev.slne.surf.surfapi.core.api.messages.adventure.text
@@ -13,6 +14,8 @@ import dev.slne.surf.surfapi.core.api.service.PlayerLookupService
 import net.kyori.adventure.text.format.TextDecoration
 
 fun CommandAPICommand.headCommand() = subcommand("head") {
+    withPermission(PermissionRegistry.LETTERGEN_COMMAND_HEAD)
+
     stringArgument("playerName")
     integerArgument("scale", min = 1, optional = true)
 
@@ -22,7 +25,7 @@ fun CommandAPICommand.headCommand() = subcommand("head") {
 
         val usableScale = scale ?: 1
 
-        container.launch {
+        plugin.launch {
             val playerUuid = PlayerLookupService.getUuid(playerName) ?: run {
                 sender.sendText {
                     appendPrefix()
