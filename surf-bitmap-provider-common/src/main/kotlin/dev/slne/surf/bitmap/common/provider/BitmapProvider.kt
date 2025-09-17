@@ -65,7 +65,7 @@ object BitmapProvider {
             }
 
             append {
-                text(-translated.sumOf { it.width } - affixAmount)
+                text(calculateGlyphSpacing(-translated.sumOf { it.width } - affixAmount))
                 text(glyphs.joinToString(""))
 
                 color(foregroundColor)
@@ -75,7 +75,7 @@ object BitmapProvider {
             text(calculateGlyphSpacing(affixAmount))
         }
     }
-    
+
     private fun translateOneChar(char: Char) =
         providers.firstNotNullOfOrNull { it.findChar(char) }
 
