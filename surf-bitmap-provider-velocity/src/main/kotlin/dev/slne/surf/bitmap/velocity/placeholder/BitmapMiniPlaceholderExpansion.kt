@@ -3,6 +3,7 @@ package dev.slne.surf.bitmap.velocity.placeholder
 import dev.slne.surf.bitmap.common.provider.BitmapProvider
 import io.github.miniplaceholders.api.Expansion
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.minimessage.tag.Tag
 
@@ -21,15 +22,15 @@ val BitmapMiniPlaceholderExpansion = Expansion.builder("bitmap")
         }
 
         val foregroundColor = TextColor.fromHexString(foregroundColorInput) ?: NamedTextColor.WHITE
-        val shadowColor = TextColor.fromHexString(shadowColorInput)
+        val shadowColor = ShadowColor.fromHexString(shadowColorInput) ?: ShadowColor.none()
         val backgroundColor = TextColor.fromHexString(backgroundColorInput) ?: NamedTextColor.BLACK
 
         Tag.selfClosingInserting(
             BitmapProvider.translateToComponent(
                 input,
                 foregroundColor,
-                shadowColor,
                 backgroundColor,
+                shadowColor,
                 affixAmount
             )
         )

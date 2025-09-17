@@ -8,7 +8,9 @@ import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import dev.slne.surf.surfapi.core.api.messages.adventure.clickCopiesToClipboard
 import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.minimessage.MiniMessage
 
 fun CommandAPICommand.translateCommand() = subcommand("translate") {
     withPermission(PermissionRegistry.LETTERGEN_COMMAND_TRANSLATE)
@@ -26,12 +28,11 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
         val affixAmount: Int by args
         val input: String by args
 
-        val foregroundColor =
-            TextColor.fromCSSHexString(foregroundColorInput) ?: NamedTextColor.WHITE
-        val shadowColor =
-            TextColor.fromCSSHexString(shadowColorInput)
-        val backgroundColor =
-            TextColor.fromCSSHexString(backgroundColorInput) ?: NamedTextColor.BLACK
+        val foregroundColor = TextColor.fromHexString(foregroundColorInput)
+            ?: NamedTextColor.WHITE
+        val backgroundColor = TextColor.fromHexString(backgroundColorInput)
+            ?: NamedTextColor.BLACK
+        val shadowColor = ShadowColor.fromHexString(shadowColorInput)
 
         sender.sendText {
             appendPrefix()
@@ -41,30 +42,22 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
             appendNewPrefixedLine()
             appendNewPrefixedLine()
 
+            val component = BitmapProvider.translateToComponent(
+                input,
+                foregroundColor,
+                backgroundColor,
+                shadowColor ?: ShadowColor.none(),
+                affixAmount
+            )
+
             append {
-                append(
-                    BitmapProvider.translateToComponent(
-                        input,
-                        foregroundColor,
-                        shadowColor,
-                        backgroundColor,
-                        affixAmount
-                    )
-                )
+                append(component)
 
                 hoverEvent(buildText {
                     spacer("Click to copy to clipboard")
                 })
 
-                clickCopiesToClipboard(
-                    BitmapProvider.translateToString(
-                        input,
-                        foregroundColor,
-                        shadowColor,
-                        backgroundColor,
-                        affixAmount
-                    )
-                )
+                clickCopiesToClipboard(MiniMessage.miniMessage().serialize(component))
             }
         }
     }
