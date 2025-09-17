@@ -1,3 +1,5 @@
+import dev.slne.surf.surfapi.gradle.util.registerRequired
+
 plugins {
     id("dev.slne.surf.surfapi.gradle.paper-plugin")
 }
@@ -7,6 +9,10 @@ surfPaperPluginApi {
     generateLibraryLoader(false)
     foliaSupported(true)
     authors.add("Ammo")
+
+    serverDependencies {
+        registerRequired("MiniPlaceholders")
+    }
 }
 
 dependencies {
