@@ -33,6 +33,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
         val backgroundColor = TextColor.fromHexString(backgroundColorInput)
             ?: NamedTextColor.BLACK
         val shadowColor = ShadowColor.fromHexString(shadowColorInput)
+            ?: ShadowColor.none()
 
         sender.sendText {
             appendPrefix()
@@ -46,7 +47,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
                 input,
                 foregroundColor,
                 backgroundColor,
-                shadowColor ?: ShadowColor.none(),
+                shadowColor,
                 affixAmount
             )
 

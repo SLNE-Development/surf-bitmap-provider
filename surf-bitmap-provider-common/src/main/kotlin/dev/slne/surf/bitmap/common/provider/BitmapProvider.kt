@@ -8,7 +8,6 @@ import dev.slne.surf.bitmap.common.utils.BITMAP_BACKGROUND
 import dev.slne.surf.bitmap.common.utils.Spacing
 import dev.slne.surf.bitmap.common.utils.calculateGlyphSpacing
 import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
-import dev.slne.surf.surfapi.core.api.messages.builder.SurfComponentBuilder
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor
@@ -57,9 +56,19 @@ object BitmapProvider {
 
         return buildText {
             append {
-                appendAffix(affixAmount, true)
+                // Prefix
+                repeat(affixAmount) {
+                    text(BITMAP_BACKGROUND)
+                    text(Spacing.NEGATIVE_SPACE_ONE.char)
+                }
+
                 text(backgroundString)
-                appendAffix(affixAmount, false)
+
+                // Suffix
+                repeat(affixAmount) {
+                    text(Spacing.NEGATIVE_SPACE_ONE.char)
+                    text(BITMAP_BACKGROUND)
+                }
 
                 color(backgroundColor)
             }
@@ -70,6 +79,7 @@ object BitmapProvider {
 
                 color(foregroundColor)
                 shadowColor(shadowColor)
+                println("Applying shadowcolor: $shadowColor")
             }
 
             text(calculateGlyphSpacing(affixAmount))
@@ -91,25 +101,6 @@ object BitmapProvider {
         }
 
         return list
-    }
-
-    private fun SurfComponentBuilder.appendAffix(
-        amount: Int,
-        prefix: Boolean,
-    ) {
-        repeat(amount) {
-            if (prefix) {
-                append {
-                    text(BITMAP_BACKGROUND)
-                    text(Spacing.NEGATIVE_SPACE_ONE.char)
-                }
-            } else {
-                append {
-                    text(Spacing.NEGATIVE_SPACE_ONE.char)
-                    text(BITMAP_BACKGROUND)
-                }
-            }
-        }
     }
 
 }

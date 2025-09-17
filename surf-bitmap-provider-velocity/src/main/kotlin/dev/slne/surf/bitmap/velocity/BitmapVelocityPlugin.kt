@@ -6,7 +6,7 @@ import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.PluginContainer
 import com.velocitypowered.api.proxy.ProxyServer
-import dev.slne.surf.bitmap.velocity.placeholder.BitmapMiniPlaceholderExpansion
+import dev.slne.surf.bitmap.common.placeholder.BitmapMiniPlaceholderExpansion
 
 class BitmapVelocityPlugin @Inject constructor(
     val server: ProxyServer,

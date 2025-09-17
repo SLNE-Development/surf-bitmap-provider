@@ -1,4 +1,4 @@
-package dev.slne.surf.bitmap.velocity.placeholder
+package dev.slne.surf.bitmap.common.placeholder
 
 import dev.slne.surf.bitmap.common.provider.BitmapProvider
 import io.github.miniplaceholders.api.Expansion

@@ -13,5 +13,4 @@ velocityPluginFile {
 
 dependencies {
     api(project(":surf-bitmap-provider-common"))
-    compileOnly(libs.miniplaceholders.api)
 }
