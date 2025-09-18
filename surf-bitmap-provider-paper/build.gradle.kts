@@ -1,4 +1,5 @@
 import dev.slne.surf.surfapi.gradle.util.registerRequired
+import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     id("dev.slne.surf.surfapi.gradle.paper-plugin")
@@ -11,7 +12,11 @@ surfPaperPluginApi {
     authors.add("Ammo")
 
     serverDependencies {
-        registerRequired("MiniPlaceholders")
+        registerRequired(
+            "MiniPlaceholders",
+            joinClassPath = true,
+            loadOrder = PaperPluginDescription.RelativeLoadOrder.BEFORE
+        )
     }
 }
 

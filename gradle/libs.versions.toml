@@ -1,7 +1,5 @@
 [versions]
-nexo = "1.10.0"
-miniplaceholders = "3.0.1"
+miniplaceholders = "2.3.0"
 
 [libraries]
-nexo = { module = "com.nexomc:nexo", version.ref = "nexo" }
 miniplaceholders-api = { module = "io.github.miniplaceholders:miniplaceholders-api", version.ref = "miniplaceholders" }

@@ -79,7 +79,6 @@ object BitmapProvider {
 
                 color(foregroundColor)
                 shadowColor(shadowColor)
-                println("Applying shadowcolor: $shadowColor")
             }
 
             text(calculateGlyphSpacing(affixAmount))
