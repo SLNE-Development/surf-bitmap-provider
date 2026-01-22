@@ -6,7 +6,6 @@ import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.PluginContainer
 import com.velocitypowered.api.proxy.ProxyServer
-import dev.slne.surf.bitmap.common.placeholder.BitmapMiniPlaceholderExpansion
 
 class BitmapVelocityPlugin @Inject constructor(
     val server: ProxyServer,
@@ -21,8 +20,6 @@ class BitmapVelocityPlugin @Inject constructor(
     @Subscribe
     fun onInitialize(event: ProxyInitializeEvent) {
         suspendingContainer.initialize(this)
-
-        BitmapMiniPlaceholderExpansion.build().register()
     }
 
     companion object {

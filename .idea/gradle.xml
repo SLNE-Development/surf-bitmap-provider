@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/surf-bitmap-provider-common" />
             <option value="$PROJECT_DIR$/surf-bitmap-provider-paper" />
+            <option value="$PROJECT_DIR$/surf-bitmap-provider-placeholders" />
             <option value="$PROJECT_DIR$/surf-bitmap-provider-velocity" />
           </set>
         </option>

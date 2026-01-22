@@ -1,5 +1,5 @@
 [versions]
-miniplaceholders = "2.3.0"
+miniplaceholders = "3.0.1"
 
 [libraries]
 miniplaceholders-api = { module = "io.github.miniplaceholders:miniplaceholders-api", version.ref = "miniplaceholders" }
