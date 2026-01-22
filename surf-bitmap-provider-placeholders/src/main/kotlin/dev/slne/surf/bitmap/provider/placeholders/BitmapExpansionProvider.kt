@@ -12,6 +12,7 @@ import net.kyori.adventure.text.minimessage.tag.Tag
 
 class BitmapExpansionProvider : ExpansionProvider {
     override fun provideExpansion(): Expansion = Expansion.builder("bitmap")
+        .author("red")
         .globalPlaceholder("translate") { queue, ctx ->
             val foregroundColorInput = queue.popOr { "foreground is required" }.value()
             val shadowColorInput = queue.popOr { "shadow is required" }.value()
