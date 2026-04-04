@@ -1,9 +1,9 @@
 package dev.slne.surf.bitmap.common.provider.providers
 
+import dev.slne.surf.api.core.util.mutableObject2ObjectMapOf
 import dev.slne.surf.bitmap.common.provider.CharProvider
 import dev.slne.surf.bitmap.common.provider.Provider
 import dev.slne.surf.bitmap.common.provider.providers.NumberProvider.findChar
-import dev.slne.surf.surfapi.core.api.util.mutableObject2ObjectMapOf
 
 /**
  * NumberProvider is a singleton implementation of the [Provider] interface that provides a mapping

@@ -1,8 +1,8 @@
 package dev.slne.surf.bitmap.common.utils
 
+import dev.slne.surf.api.core.util.objectListOf
 import dev.slne.surf.bitmap.common.utils.Spacing.Companion.NEGATIVE_SPACES
 import dev.slne.surf.bitmap.common.utils.Spacing.Companion.POSITIVE_SPACES
-import dev.slne.surf.surfapi.core.api.util.objectListOf
 import kotlin.math.abs
 
 /**

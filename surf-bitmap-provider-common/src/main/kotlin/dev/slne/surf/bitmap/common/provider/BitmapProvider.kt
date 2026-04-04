@@ -1,5 +1,6 @@
 package dev.slne.surf.bitmap.common.provider
 
+import dev.slne.surf.api.core.messages.adventure.buildText
 import dev.slne.surf.bitmap.common.provider.providers.AlphabetProvider
 import dev.slne.surf.bitmap.common.provider.providers.NumberProvider
 import dev.slne.surf.bitmap.common.provider.providers.UnknownProvider
@@ -7,7 +8,6 @@ import dev.slne.surf.bitmap.common.provider.providers.UtilityProvider
 import dev.slne.surf.bitmap.common.utils.BITMAP_BACKGROUND
 import dev.slne.surf.bitmap.common.utils.Spacing
 import dev.slne.surf.bitmap.common.utils.calculateGlyphSpacing
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor

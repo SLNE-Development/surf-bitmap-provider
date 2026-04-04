@@ -1,5 +1,5 @@
 plugins {
-    id("dev.slne.surf.surfapi.gradle.velocity")
+    id("dev.slne.surf.api.gradle.velocity")
 }
 
 velocityPluginFile {
@@ -12,5 +12,5 @@ velocityPluginFile {
 }
 
 dependencies {
-    api(project(":surf-bitmap-provider-common"))
+    api(projects.surfBitmapProviderCommon)
 }

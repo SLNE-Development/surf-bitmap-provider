@@ -1,6 +1,7 @@
 package dev.slne.surf.bitmap.common.head
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import dev.slne.surf.api.core.messages.adventure.buildText
 import dev.slne.surf.bitmap.common.head.image.getFirstHeadPixelsFromImage
 import dev.slne.surf.bitmap.common.head.image.getImageFromUrl
 import dev.slne.surf.bitmap.common.head.image.getSecondHeadPixelsFromImage
@@ -8,7 +9,6 @@ import dev.slne.surf.bitmap.common.head.texture.decodeTextureString
 import dev.slne.surf.bitmap.common.head.texture.getTextureStringByUuid
 import dev.slne.surf.bitmap.common.utils.Pixels
 import dev.slne.surf.bitmap.common.utils.calculateGlyphSpacing
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor

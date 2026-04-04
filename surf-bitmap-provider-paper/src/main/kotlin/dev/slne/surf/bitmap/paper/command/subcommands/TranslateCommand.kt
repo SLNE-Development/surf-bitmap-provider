@@ -2,18 +2,18 @@ package dev.slne.surf.bitmap.paper.command.subcommands
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.*
+import dev.slne.surf.api.core.messages.adventure.buildText
+import dev.slne.surf.api.core.messages.adventure.clickCopiesToClipboard
+import dev.slne.surf.api.core.messages.adventure.sendText
 import dev.slne.surf.bitmap.common.provider.BitmapProvider
 import dev.slne.surf.bitmap.paper.command.PermissionRegistry
-import dev.slne.surf.surfapi.core.api.messages.adventure.buildText
-import dev.slne.surf.surfapi.core.api.messages.adventure.clickCopiesToClipboard
-import dev.slne.surf.surfapi.core.api.messages.adventure.sendText
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.minimessage.MiniMessage
 
 fun CommandAPICommand.translateCommand() = subcommand("translate") {
-    withPermission(PermissionRegistry.LETTERGEN_COMMAND_TRANSLATE)
+    withPermission(PermissionRegistry.LETTER_GEN_COMMAND_TRANSLATE)
 
     textArgument("foregroundColorInput")
     textArgument("shadowColorInput")
@@ -36,12 +36,12 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
             ?: ShadowColor.none()
 
         sender.sendText {
-            appendPrefix()
+            appendInfoPrefix()
             info("Translating: ")
             variableValue(input)
 
-            appendNewPrefixedLine()
-            appendNewPrefixedLine()
+            appendNewInfoPrefixedLine()
+            appendNewInfoPrefixedLine()
 
             val component = BitmapProvider.translateToComponent(
                 input,

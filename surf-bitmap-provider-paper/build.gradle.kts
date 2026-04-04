@@ -1,8 +1,8 @@
-import dev.slne.surf.surfapi.gradle.util.registerRequired
+import dev.slne.surf.api.gradle.util.registerRequired
 import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
-    id("dev.slne.surf.surfapi.gradle.paper-plugin")
+    id("dev.slne.surf.api.gradle.paper-plugin")
 }
 
 surfPaperPluginApi {
@@ -21,5 +21,5 @@ surfPaperPluginApi {
 }
 
 dependencies {
-    api(project(":surf-bitmap-provider-common"))
+    api(projects.surfBitmapProviderCommon)
 }
