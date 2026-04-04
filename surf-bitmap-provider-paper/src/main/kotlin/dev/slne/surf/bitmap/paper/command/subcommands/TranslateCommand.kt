@@ -40,8 +40,7 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
             info("Translating: ")
             variableValue(input)
 
-            appendNewInfoPrefixedLine()
-            appendNewInfoPrefixedLine()
+            appendNewInfoPrefixedLine(2)
 
             val component = BitmapProvider.translateToComponent(
                 input,
