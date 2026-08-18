@@ -2,15 +2,8 @@ package dev.slne.surf.bitmap.paper.command.subcommands
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.kotlindsl.*
-import dev.slne.surf.api.core.messages.adventure.buildText
-import dev.slne.surf.api.core.messages.adventure.clickCopiesToClipboard
-import dev.slne.surf.api.core.messages.adventure.sendText
-import dev.slne.surf.bitmap.common.provider.BitmapProvider
+import dev.slne.surf.bitmap.common.command.sendBitmapTranslation
 import dev.slne.surf.bitmap.paper.command.PermissionRegistry
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.ShadowColor
-import net.kyori.adventure.text.format.TextColor
-import net.kyori.adventure.text.minimessage.MiniMessage
 
 fun CommandAPICommand.translateCommand() = subcommand("translate") {
     withPermission(PermissionRegistry.LETTER_GEN_COMMAND_TRANSLATE)
@@ -28,37 +21,12 @@ fun CommandAPICommand.translateCommand() = subcommand("translate") {
         val affixAmount: Int by args
         val input: String by args
 
-        val foregroundColor = TextColor.fromHexString(foregroundColorInput)
-            ?: NamedTextColor.WHITE
-        val backgroundColor = TextColor.fromHexString(backgroundColorInput)
-            ?: NamedTextColor.BLACK
-        val shadowColor = ShadowColor.fromHexString(shadowColorInput)
-            ?: ShadowColor.none()
-
-        sender.sendText {
-            appendInfoPrefix()
-            info("Translating: ")
-            variableValue(input)
-
-            appendNewInfoPrefixedLine(2)
-
-            val component = BitmapProvider.translateToComponent(
-                input,
-                foregroundColor,
-                backgroundColor,
-                shadowColor,
-                affixAmount
-            )
-
-            append {
-                append(component)
-
-                hoverEvent(buildText {
-                    spacer("Click to copy to clipboard")
-                })
-
-                clickCopiesToClipboard(MiniMessage.miniMessage().serialize(component))
-            }
-        }
+        sender.sendBitmapTranslation(
+            foregroundColorInput,
+            shadowColorInput,
+            backgroundColorInput,
+            affixAmount,
+            input
+        )
     }
 }
