@@ -1,6 +1,8 @@
 package dev.slne.surf.bitmap.common.head.image
 
 import dev.slne.surf.bitmap.common.head.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import net.kyori.adventure.text.format.TextColor
 import java.awt.Color
 import java.awt.Image
@@ -49,11 +51,11 @@ fun convertImageToBufferedImage(image: Image): BufferedImage {
     }
 }
 
-fun getImageFromUrl(url: URL): Image {
+suspend fun getImageFromUrl(url: URL): Image = withContext(Dispatchers.IO) {
     val connection = url.openConnection()
 
     connection.addRequestProperty("User-Agent", "Mozilla/5.0")
     connection.connect()
 
-    return ImageIO.read(connection.getInputStream())
+    return@withContext ImageIO.read(connection.getInputStream())
 }

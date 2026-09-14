@@ -6,6 +6,8 @@ import dev.slne.surf.api.core.messages.adventure.text
 import dev.slne.surf.api.core.service.PlayerLookupService
 import dev.slne.surf.bitmap.common.head.composeHead
 import dev.slne.surf.bitmap.common.head.getHeadRowsByUuid
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.format.TextDecoration
 
@@ -15,7 +17,7 @@ import net.kyori.adventure.text.format.TextDecoration
  *
  * Sends an error message instead when no player with that name exists.
  */
-suspend fun Audience.sendPlayerHead(playerName: String, scale: Int?) {
+suspend fun Audience.sendPlayerHead(playerName: String, scale: Int?) = withContext(Dispatchers.IO) {
     val usableScale = scale ?: 1
 
     val playerUuid = PlayerLookupService.getUuid(playerName) ?: run {
@@ -27,7 +29,7 @@ suspend fun Audience.sendPlayerHead(playerName: String, scale: Int?) {
             error(" not found.")
         }
 
-        return
+        return@withContext
     }
 
     val head = getHeadRowsByUuid(playerUuid, usableScale)
