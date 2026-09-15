@@ -10,8 +10,6 @@ import dev.slne.surf.bitmap.common.head.texture.decodeTextureString
 import dev.slne.surf.bitmap.common.head.texture.getTextureStringByUuid
 import dev.slne.surf.bitmap.common.utils.Pixels
 import dev.slne.surf.bitmap.common.utils.calculateGlyphSpacing
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.ShadowColor
 import net.kyori.adventure.text.format.TextColor
@@ -48,7 +46,7 @@ fun composeHead(rows: List<Component>, text: List<Component> = listOf()) = build
 }
 
 
-suspend fun renderHead(base64Texture: String, scale: Int = 1): List<Component> = withContext(Dispatchers.IO) {
+suspend fun renderHead(base64Texture: String, scale: Int = 1): List<Component> {
     val textureProperty = decodeTextureString(base64Texture)
     val skinUrl = textureProperty.textures.skin?.url ?: "https://textures.minecraft.net/texture/e5290797345e361e4aa8279086a78e24902e17ecf5520920fe921874360bdf4c"
     val skinImage = getImageFromUrl(URI.create(skinUrl).toURL())
@@ -56,7 +54,7 @@ suspend fun renderHead(base64Texture: String, scale: Int = 1): List<Component> =
     val firstLayer = getFirstHeadPixelsFromImage(skinImage)
     val secondLayer = getSecondHeadPixelsFromImage(skinImage)
 
-    return@withContext getHeadRowsByLayers(listOf(firstLayer, secondLayer), scale)
+    return getHeadRowsByLayers(listOf(firstLayer, secondLayer), scale)
 }
 
 suspend fun getHeadRowsByUuid(uuid: UUID, scale: Int = 1): List<Component> {

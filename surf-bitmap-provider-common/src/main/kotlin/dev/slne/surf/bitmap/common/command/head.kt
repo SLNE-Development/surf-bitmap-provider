@@ -1,15 +1,11 @@
 package dev.slne.surf.bitmap.common.command
 
-import dev.slne.surf.api.core.messages.adventure.buildText
 import dev.slne.surf.api.core.messages.adventure.sendText
-import dev.slne.surf.api.core.messages.adventure.text
 import dev.slne.surf.api.core.service.PlayerLookupService
 import dev.slne.surf.bitmap.common.head.composeHead
 import dev.slne.surf.bitmap.common.head.getHeadRowsByUuid
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import net.kyori.adventure.audience.Audience
-import net.kyori.adventure.text.format.TextDecoration
+import net.kyori.adventure.text.Component
 
 /**
  * Looks up the player behind [playerName], renders their head at the given [scale] and sends it to
@@ -17,7 +13,11 @@ import net.kyori.adventure.text.format.TextDecoration
  *
  * Sends an error message instead when no player with that name exists.
  */
-suspend fun Audience.sendPlayerHead(playerName: String, scale: Int?) = withContext(Dispatchers.IO) {
+suspend fun Audience.sendPlayerHead(
+    playerName: String,
+    scale: Int?,
+    extraTest: (MutableList<Component>.() -> Unit)?
+) {
     val usableScale = scale ?: 1
 
     val playerUuid = PlayerLookupService.getUuid(playerName) ?: run {
@@ -29,32 +29,14 @@ suspend fun Audience.sendPlayerHead(playerName: String, scale: Int?) = withConte
             error(" not found.")
         }
 
-        return@withContext
+        return
     }
 
-    val head = getHeadRowsByUuid(playerUuid, usableScale)
-
-    val extraText = listOf(
-        text(""),
-        text(""),
-        buildText {
-            repeat(3) { appendSpace() }
-            primary("Special-Drop", TextDecoration.BOLD)
-        },
-        text(""),
-        buildText {
-            repeat(3) { appendSpace() }
-            variableValue(playerName)
-        },
-        buildText {
-            repeat(3) { appendSpace() }
-            spacer("hat eine ")
-            variableValue("Elytra")
-            spacer(" erhalten!")
-        }
-    )
+    val extraText = mutableListOf<Component>().apply {
+        extraTest?.invoke(this)
+    }
 
     sendText {
-        append(composeHead(head, extraText))
+        append(composeHead(getHeadRowsByUuid(playerUuid, usableScale), extraText))
     }
 }
