@@ -1,6 +1,7 @@
 package dev.slne.surf.bitmap.common.head
 
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.sksamuel.aedile.core.asLoadingCache
 import dev.slne.surf.api.core.messages.adventure.buildText
 import dev.slne.surf.bitmap.common.head.image.getFirstHeadPixelsFromImage
 import dev.slne.surf.bitmap.common.head.image.getImageFromUrl
@@ -16,7 +17,7 @@ import java.net.URI
 import java.util.*
 
 private val headPixelCache =
-    Caffeine.newBuilder().build<UUID, HeadResponse> { uuid ->
+    Caffeine.newBuilder().asLoadingCache<UUID, HeadResponse> { uuid ->
         val textures = getTextureStringByUuid(uuid) ?: TODO("Implement steves")
         val textureProperty = decodeTextureString(textures)
         val skinUrl = textureProperty.textures.skin?.url ?: TODO("Implement steves")
@@ -44,7 +45,19 @@ fun composeHead(rows: List<Component>, text: List<Component> = listOf()) = build
     }
 }
 
-fun getHeadRowsByUuid(uuid: UUID, scale: Int = 1): List<Component> {
+
+suspend fun renderHead(base64Texture: String, scale: Int = 1): List<Component> {
+    val textureProperty = decodeTextureString(base64Texture)
+    val skinUrl = textureProperty.textures.skin?.url ?: "https://textures.minecraft.net/texture/e5290797345e361e4aa8279086a78e24902e17ecf5520920fe921874360bdf4c"
+    val skinImage = getImageFromUrl(URI.create(skinUrl).toURL())
+
+    val firstLayer = getFirstHeadPixelsFromImage(skinImage)
+    val secondLayer = getSecondHeadPixelsFromImage(skinImage)
+
+    return getHeadRowsByLayers(listOf(firstLayer, secondLayer), scale)
+}
+
+suspend fun getHeadRowsByUuid(uuid: UUID, scale: Int = 1): List<Component> {
     val (firstLayer, secondLayer) = headPixelCache.get(uuid)
 
     return getHeadRowsByLayers(listOf(firstLayer, secondLayer), scale)
