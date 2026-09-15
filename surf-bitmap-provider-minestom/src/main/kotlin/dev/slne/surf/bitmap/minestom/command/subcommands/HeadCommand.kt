@@ -16,7 +16,7 @@ fun CommandAPICommand.headCommand() = withSubcommand(
             val playerName: String by args
             val scale: Int? by args
 
-            sender.sendPlayerHead(playerName, scale)
+            sender.sendPlayerHead(playerName, scale, null)
         }
     }
 )
