@@ -57,5 +57,7 @@ suspend fun getImageFromUrl(url: URL): Image = withContext(Dispatchers.IO) {
     connection.addRequestProperty("User-Agent", "Mozilla/5.0")
     connection.connect()
 
-    return@withContext ImageIO.read(connection.getInputStream())
+    connection.getInputStream().use {
+        return@withContext ImageIO.read(it)
+    }
 }
