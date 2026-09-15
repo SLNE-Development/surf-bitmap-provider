@@ -18,7 +18,7 @@ fun CommandAPICommand.headCommand() = subcommand("head") {
         val scale: Int? by args
 
         plugin.launch {
-            sender.sendPlayerHead(playerName, scale)
+            sender.sendPlayerHead(playerName, scale, null)
         }
     }
 }
