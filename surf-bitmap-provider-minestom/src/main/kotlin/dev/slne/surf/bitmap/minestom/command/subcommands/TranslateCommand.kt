@@ -1,7 +1,7 @@
 package dev.slne.surf.bitmap.minestom.command.subcommands
 
-import dev.slne.minestom.lobby.api.command.commandapi.CommandAPICommand
-import dev.slne.minestom.lobby.api.command.commandapi.dsl.*
+import dev.slne.surf.api.minestom.command.CommandAPICommand
+import dev.slne.surf.api.minestom.command.dsl.*
 import dev.slne.surf.bitmap.common.command.sendBitmapTranslation
 import dev.slne.surf.bitmap.common.permission.BitmapPermissions
 

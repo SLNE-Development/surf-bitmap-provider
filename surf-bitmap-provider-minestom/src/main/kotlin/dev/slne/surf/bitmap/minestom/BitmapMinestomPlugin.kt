@@ -1,17 +1,10 @@
 package dev.slne.surf.bitmap.minestom
 
-import com.google.auto.service.AutoService
-import dev.slne.minestom.lobby.api.plugin.MinestomPlugin
-import dev.slne.minestom.lobby.api.plugin.annotation.MinestomPluginMeta
-import dev.slne.surf.bitmap.minestom.command.BitmapCommandRegistrar
+import dev.slne.surf.api.minestom.plugin.SurfMinestomPlugin
+import dev.slne.surf.bitmap.minestom.command.lettergenCommand
 
-@AutoService(MinestomPlugin::class)
-@MinestomPluginMeta(
-    "surf-bitmap-provider-minestom",
-    dependsOn = ["surf-api-minestom"]
-)
-class BitmapMinestomPlugin : MinestomPlugin(BitmapMinestomEntrypoint::class.java) {
-    override fun configurePlugin() {
-        bindCommandRegistrar<BitmapCommandRegistrar>()
+object BitmapMinestomPlugin : SurfMinestomPlugin() {
+    override suspend fun onEnable() {
+        lettergenCommand()
     }
 }

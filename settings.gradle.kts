@@ -3,6 +3,7 @@ rootProject.name = "surf-bitmap-provider"
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        mavenLocal()
         maven("https://reposilite.slne.dev/public/") { name = "public" }
     }
 }
