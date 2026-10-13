@@ -4,10 +4,6 @@ plugins {
     id("dev.slne.surf.api.gradle.minestom")
 }
 
-repositories {
-    mavenLocal()
-}
-
 minestomPluginFile {
     main = "dev.slne.surf.bitmap.minestom.BitmapMinestomPlugin"
     authors = listOf("Ammo")
